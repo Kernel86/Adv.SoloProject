@@ -96,6 +96,12 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Adv.SoloProject.Business\Adv.SoloProject.Business.csproj">
+      <Project>{EE33E8E5-19A1-4496-ACB9-38CA3015A1B2}</Project>
+      <Name>Adv.SoloProject.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,7 +11,7 @@
                 <MenuItem Header="Exit" Name="mnuExit" Click="mnuExit_Click" />
             </MenuItem>
             <MenuItem Header="Help" Name="mnuHelp">
-                <MenuItem Header="About" Name="mnuAbout" />
+                <MenuItem Header="About" Name="mnuAbout" Click="mnuAbout_Click" />
             </MenuItem>
         </Menu>
         

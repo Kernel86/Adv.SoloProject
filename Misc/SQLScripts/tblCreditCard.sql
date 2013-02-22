@@ -1,0 +1,14 @@
+
+CREATE TABLE [dbo].[tblCreditCard] (
+  [CreditCard_Id] INT NOT NULL IDENTITY(0,1),
+  [Customer_Id] INT NOT NULL ,
+  [CardName] VARCHAR(48) NULL ,
+  [CardNumber] VARCHAR(19) NULL ,
+  [CreditCardType_Id] INT NOT NULL,
+  CONSTRAINT [PK_tblCreditCard] PRIMARY KEY CLUSTERED 
+(
+	[CreditCard_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO

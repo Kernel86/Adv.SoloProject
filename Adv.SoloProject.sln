@@ -7,6 +7,31 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adv.SoloProject.Data", "Adv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adv.SoloProject.Business", "Adv.SoloProject.Business\Adv.SoloProject.Business.csproj", "{EE33E8E5-19A1-4496-ACB9-38CA3015A1B2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{003715E3-061F-45D4-B9E4-6D75F6E82B8D}"
+	ProjectSection(SolutionItems) = preProject
+		Misc\MediaVault.mpp = Misc\MediaVault.mpp
+		Misc\MediaVault.mwb = Misc\MediaVault.mwb
+		Misc\MediaVault_ERD.png = Misc\MediaVault_ERD.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLScripts", "SQLScripts", "{999F1967-27E2-482A-9478-A1F742F52CD8}"
+	ProjectSection(SolutionItems) = preProject
+		Misc\SQLScripts\listPopulations.sql = Misc\SQLScripts\listPopulations.sql
+		Misc\SQLScripts\tblCreditCard.sql = Misc\SQLScripts\tblCreditCard.sql
+		Misc\SQLScripts\tblCreditCardType.sql = Misc\SQLScripts\tblCreditCardType.sql
+		Misc\SQLScripts\tblCustomer.sql = Misc\SQLScripts\tblCustomer.sql
+		Misc\SQLScripts\tblCustomerStatus.sql = Misc\SQLScripts\tblCustomerStatus.sql
+		Misc\SQLScripts\tblFormat.sql = Misc\SQLScripts\tblFormat.sql
+		Misc\SQLScripts\tblMedia.sql = Misc\SQLScripts\tblMedia.sql
+		Misc\SQLScripts\tblMediaItem.sql = Misc\SQLScripts\tblMediaItem.sql
+		Misc\SQLScripts\tblMediaItemPricing.sql = Misc\SQLScripts\tblMediaItemPricing.sql
+		Misc\SQLScripts\tblMediaItemState.sql = Misc\SQLScripts\tblMediaItemState.sql
+		Misc\SQLScripts\tblPaymentType.sql = Misc\SQLScripts\tblPaymentType.sql
+		Misc\SQLScripts\tblRental.sql = Misc\SQLScripts\tblRental.sql
+		Misc\SQLScripts\tblRentalItem.sql = Misc\SQLScripts\tblRentalItem.sql
+		Misc\SQLScripts\tblRentalItemStatus.sql = Misc\SQLScripts\tblRentalItemStatus.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 4
@@ -65,5 +90,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{999F1967-27E2-482A-9478-A1F742F52CD8} = {003715E3-061F-45D4-B9E4-6D75F6E82B8D}
 	EndGlobalSection
 EndGlobal

@@ -59,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="wpfDlgAbout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="wpfMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,6 +70,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="wpfDlgAbout.xaml.cs">
+      <DependentUpon>wpfDlgAbout.xaml</DependentUpon>
     </Compile>
     <Compile Include="wpfMain.xaml.cs">
       <DependentUpon>wpfMain.xaml</DependentUpon>
@@ -101,6 +108,9 @@
       <Project>{EE33E8E5-19A1-4496-ACB9-38CA3015A1B2}</Project>
       <Name>Adv.SoloProject.Business</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\IM000194_small.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

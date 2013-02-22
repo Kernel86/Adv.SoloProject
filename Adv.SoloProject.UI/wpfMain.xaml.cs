@@ -132,5 +132,13 @@ namespace Adv.SoloProject.UI
                 btnManagement.Content = "Management";
             }
         }
+
+        private void mnuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            // Show About dialog
+            wpfDlgAbout wpfAbout = new wpfDlgAbout();
+            wpfAbout.ShowDialog();
+            wpfAbout = null;
+        }
     }
 }

@@ -1,0 +1,11 @@
+
+CREATE TABLE [dbo].[tblRentalItemStatus] (
+  [RentalItemStatus_Id] INT NOT NULL IDENTITY(0,1),
+  [Description] VARCHAR(16) NULL ,
+  CONSTRAINT [PK_tblRentalItemStatus] PRIMARY KEY CLUSTERED 
+  (
+	[RentalItemStatus_Id] ASC
+  )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO

@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Adv.SoloProject.Business;
+
 namespace Adv.SoloProject.UI
 {
     /// <summary>
@@ -19,6 +21,12 @@ namespace Adv.SoloProject.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        CCustomers _oCustomers;
+        CMedias _oMedias;
+        CFormats _oFormats;
+        CMediaItems _oMediaItems;
+        CMediaItemPricings _oMediaItemPricings;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,9 +34,26 @@ namespace Adv.SoloProject.UI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lblStatus.Content = "Loaded";
-            gridManagement.Visibility = gridRental.Visibility = gridNewCustomer.Visibility = Visibility.Hidden;
-            gridHome.Visibility = Visibility.Visible;
+            try
+            {
+                _oCustomers = new CCustomers();
+                _oCustomers.Load();
+
+                dgCustomers.ItemsSource = null;
+                dgCustomers.ItemsSource = _oCustomers.Items;
+
+                _oMedias = new CMedias();
+                _oMedias.Load();
+
+                gridManagement.Visibility = gridRental.Visibility = gridNewCustomer.Visibility = Visibility.Hidden;
+                gridHome.Visibility = Visibility.Visible;
+
+                lblStatus.Content = "Loaded";
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content = ex.Message;
+            }
         }
 
         private void mnuExit_Click(object sender, RoutedEventArgs e)
@@ -50,15 +75,46 @@ namespace Adv.SoloProject.UI
 
             gridNewCustomer.Visibility = Visibility.Visible;
             btnNewCustomer.IsEnabled = btnManagement.IsEnabled = false;
-
         }
 
+        // Create new customer
         private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
         {
             gridNewCustomer.Visibility = Visibility.Hidden;
             btnNewCustomer.IsEnabled = btnManagement.IsEnabled = true;
 
             gridHome.Visibility = Visibility.Visible;
+
+            // Register new customer with the system
+            try
+            {
+                CCustomer oCustomer = new CCustomer();
+                
+              //oCustomer.CustomerId = 0;
+                oCustomer.AccountNumber = txtFirstName.Text.Substring(0, 1) + txtLastName.Text.Substring(0, 1) + txtZipCode.Text.Substring(txtZipCode.Text.Length - 2, 2);
+                oCustomer.FirstName = txtFirstName.Text;
+                oCustomer.LastName = txtLastName.Text;
+                oCustomer.Address = txtAddress.Text;
+                oCustomer.City = txtCity.Text;
+              //oCustomer.State = cbState.SelectedIndex;
+                oCustomer.State = "UN";
+                oCustomer.Zip = txtZipCode.Text;
+                oCustomer.Phone = txtPhoneNumber.Text;
+                oCustomer.Email = txtEmailAddress.Text;
+                oCustomer.DateOfBirth = (DateTime)dpDOB.SelectedDate;
+                oCustomer.CustomerStatusId = 0;
+
+                oCustomer.Insert();
+                _oCustomers.Add(oCustomer);
+                //oCustomer = null;
+
+                dgCustomers.ItemsSource = null;
+                dgCustomers.ItemsSource = _oCustomers.Items;
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content = "Error: " + ex.Message;
+            }
         }
 
         private void btnNewCustomerCancel_Click(object sender, RoutedEventArgs e)
@@ -99,6 +155,9 @@ namespace Adv.SoloProject.UI
         {
             gbFormats.Visibility = gbPricing.Visibility = Visibility.Hidden;
             gbMovies.Visibility = Visibility.Visible;
+
+            dgManagement.ItemsSource = null;
+            dgManagement.ItemsSource = _oMedias.Items;
         }
 
         private void btnManagementFormats_Click(object sender, RoutedEventArgs e)
@@ -122,6 +181,9 @@ namespace Adv.SoloProject.UI
 
                 gridManagement.Visibility = gbMovies.Visibility = Visibility.Visible;
                 btnManagement.Content = "Home";
+
+                dgManagement.ItemsSource = null;
+                dgManagement.ItemsSource = _oMedias.Items;
             }
             else
             {
@@ -133,12 +195,62 @@ namespace Adv.SoloProject.UI
             }
         }
 
+        // Show About dialog
         private void mnuAbout_Click(object sender, RoutedEventArgs e)
         {
-            // Show About dialog
             wpfDlgAbout wpfAbout = new wpfDlgAbout();
             wpfAbout.ShowDialog();
             wpfAbout = null;
+        }
+
+        // Create new movie
+        private void btnManagementMoveNew_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                CMedia oMedia = new CMedia();
+
+                //oMedia.MediaId = 0;
+                oMedia.ReleaseDate = (DateTime)dpManagementMovieReleaseDate.SelectedDate;
+                oMedia.Title = txtManagementMovieTitle.Text;
+
+                oMedia.Insert();
+                _oMedias.Add(oMedia);
+
+                dgManagement.ItemsSource = null;
+                dgManagement.ItemsSource = _oMedias.Items;
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content = "Error: " + ex.Message;
+            }
+        }
+
+        // Delete a movie
+        private void btnManagementMovieDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _oMedias[dgManagement.SelectedIndex].Delete();
+                _oMedias.RemoveAt(dgManagement.SelectedIndex);
+
+                dgManagement.ItemsSource = null; 
+                dgManagement.ItemsSource = _oMedias.Items;
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content = "Error: " + ex.Message;
+            }
+        }
+
+        private void dgCustomers_Loaded(object sender, RoutedEventArgs e)
+        {
+            dgCustomers.Columns[0].Visibility = Visibility.Hidden;
+            dgCustomers.Columns[11].Visibility = Visibility.Hidden;
+
+            // Format birth dates
+            DataGridTextColumn dgTc = dgCustomers.Columns[10] as DataGridTextColumn;
+            dgTc.Binding.StringFormat = "{0:dd/MM/yyy}";
         }
     }
 }

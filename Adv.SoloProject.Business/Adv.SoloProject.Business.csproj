@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,7 +45,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCreditCard.cs" />
+    <Compile Include="CCreditCards.cs" />
+    <Compile Include="CCreditCardType.cs" />
+    <Compile Include="CCreditCardTypes.cs" />
     <Compile Include="CCustomer.cs" />
+    <Compile Include="CCustomers.cs" />
+    <Compile Include="CFormat.cs" />
+    <Compile Include="CFormats.cs" />
+    <Compile Include="CMedia.cs" />
+    <Compile Include="CMediaItem.cs" />
+    <Compile Include="CMediaItemPricing.cs" />
+    <Compile Include="CMediaItemPricings.cs" />
+    <Compile Include="CMediaItems.cs" />
+    <Compile Include="CMedias.cs" />
+    <Compile Include="CRental.cs" />
+    <Compile Include="CRentalItem.cs" />
+    <Compile Include="CRentalItems.cs" />
+    <Compile Include="CRentals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@
         Title="Media Vault" Height="420" Width="743" Background="#FFF0F0F0" Loaded="Window_Loaded" MinHeight="420" MinWidth="740">
     <Grid MinWidth="720" MinHeight="380">
         <StatusBar Height="23" Name="statusBar" VerticalAlignment="Bottom" BorderThickness="0" Focusable="False">
-            <StatusBarItem Name="lblStatus" Width="300" Focusable="False" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" VerticalAlignment="Stretch" />
+            <StatusBarItem Name="lblStatus" Width="720" Focusable="False" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" VerticalAlignment="Stretch" />
         </StatusBar>
         <Menu Height="23" Name="menu1" VerticalAlignment="Top">
             <MenuItem Header="File" Name="mnuFile">
@@ -15,7 +15,7 @@
             </MenuItem>
         </Menu>
         
-        <Grid Name="gridHome" Visibility="Visible">
+        <Grid Name="gridHome" Visibility="Hidden">
             <Label Content="Account:" Height="28" HorizontalAlignment="Left" Margin="43,29,0,0" Name="label1" VerticalAlignment="Top" />
             <TextBox Height="23" HorizontalAlignment="Left" Margin="105,31,0,0" Name="txtLookupAccount" VerticalAlignment="Top" Width="120" />
             <Label Content="First Name:" Height="28" HorizontalAlignment="Left" Margin="29,54,0,0" Name="label2" VerticalAlignment="Top" />
@@ -24,7 +24,7 @@
             <TextBox Height="23" Margin="320,56,0,0" Name="txtLookupLastName" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" />
             <Label Content="Phone:" Height="28" HorizontalAlignment="Left" Margin="268,29,0,0" Name="label4" VerticalAlignment="Top" />
             <TextBox Height="23" Margin="320,31,0,0" Name="txtLookupPhone" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" />
-            <DataGrid AutoGenerateColumns="False" Margin="12,88,12,58" Name="dgCustomers" />
+            <DataGrid AutoGenerateColumns="True" Margin="12,88,12,58" Name="dgCustomers" Loaded="dgCustomers_Loaded" />
             <Button Content="Select Customer" Height="52" HorizontalAlignment="Right" Margin="0,27,12,0" Name="btnSelectCustomer" VerticalAlignment="Top" Width="98" Click="btnSelectCustomer_Click" />
         </Grid>
 
@@ -63,12 +63,12 @@
             </GroupBox>
         </Grid>
 
-        <Grid Name="gridManagement" Visibility="Hidden">
+        <Grid Name="gridManagement" Visibility="Visible">
             <Button Content="Formats" Margin="306,29,0,0" Name="btnManagementFormats" HorizontalAlignment="Left" Width="111" Height="23" VerticalAlignment="Top" Click="btnManagementFormats_Click" />
             <Button Content="Pricing Categories" Height="23" HorizontalAlignment="Left" Margin="440,29,0,0" Name="btmManagementPricing" VerticalAlignment="Top" Width="111" Click="btmManagementPricing_Click" />
             <Button Content="Movies" Height="23" HorizontalAlignment="Left" Margin="169,29,0,0" Name="btnManagementMovies" VerticalAlignment="Top" Width="111" Click="btnManagementMovies_Click" />
-            <DataGrid AutoGenerateColumns="False" Margin="12,58,251,58" Name="dgManagement" />
-            <GroupBox Header="Movie Information" Height="265" HorizontalAlignment="Right" Margin="0,58,12,0" Name="gbMovies" VerticalAlignment="Top" Width="233" Visibility="Hidden">
+            <DataGrid AutoGenerateColumns="True" Margin="12,58,251,58" Name="dgManagement" />
+            <GroupBox Header="Movie Information" Height="265" HorizontalAlignment="Right" Margin="0,58,12,0" Name="gbMovies" VerticalAlignment="Top" Width="233" Visibility="Visible">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="76*" />
@@ -80,8 +80,8 @@
                     <Label Content="Title:" Height="28" HorizontalAlignment="Left" Margin="52,4,0,0" Name="label26" VerticalAlignment="Top" Grid.ColumnSpan="2" />
                     <TextBox Height="23" HorizontalAlignment="Right" Margin="0,6,13,0" Name="txtManagementMovieTitle" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2" />
                     <Button Content="Manage Copies" Height="23" HorizontalAlignment="Left" Margin="1,208,0,0" Name="btnManagementMovieManageCopies" VerticalAlignment="Top" Width="97" Grid.Column="2" />
-                    <Button Content="New" Height="23" HorizontalAlignment="Left" Margin="1,66,0,0" Name="btnManagementMoveNew" VerticalAlignment="Top" Width="97" Grid.Column="2" />
-                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="23,95,0,0" Name="btnManagementMovieDelete" VerticalAlignment="Top" Width="75" Grid.Column="2" />
+                    <Button Content="New" Height="23" HorizontalAlignment="Left" Margin="1,66,0,0" Name="btnManagementMoveNew" VerticalAlignment="Top" Width="97" Grid.Column="2" Click="btnManagementMoveNew_Click" />
+                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="23,95,0,0" Name="btnManagementMovieDelete" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnManagementMovieDelete_Click" />
                     <Label Content="Total Copies:" Height="28" HorizontalAlignment="Left" Margin="9,177,0,0" Name="label27" VerticalAlignment="Top" Grid.ColumnSpan="2" />
                     <TextBox Height="23" HorizontalAlignment="Right" Margin="0,179,13,0" Name="txtManagementMovieCopies" VerticalAlignment="Top" Width="120" TextAlignment="Right" IsReadOnly="True" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="12,148,0,0" Name="txtManagementMovieId" VerticalAlignment="Top" Width="120" Grid.Column="1" Visibility="Hidden" Grid.ColumnSpan="2" />

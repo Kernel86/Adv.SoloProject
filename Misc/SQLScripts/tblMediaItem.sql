@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[tblMediaItem] (
   [InvetoryDate] DATE NULL ,
   [Media_Id] INT NOT NULL ,
   [MediaItemState_Id] INT NOT NULL ,
-  [MediaItemPricing] INT NOT NULL,
+  [MediaItemPricing_Id] INT NOT NULL,
   [Format_Id] INT NOT NULL ,
  CONSTRAINT [PK_tblMediaItem] PRIMARY KEY CLUSTERED 
 (

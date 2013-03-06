@@ -18,9 +18,10 @@ INSERT INTO tblFormat VALUES('Beta');
 INSERT INTO tblFormat VALUES('CED');
 
 /* MediaItemState Population */
-INSERT INTO tblMediaItemState VALUES('Active');
+INSERT INTO tblMediaItemState VALUES('Available');
 INSERT INTO tblMediaItemState VALUES('Damaged');
 INSERT INTO tblMediaItemState VALUES('Withdrawn');
+INSERT INTO tblMediaItemState VALUES('Checked Out');
 
 
 /* PaymentType Population */

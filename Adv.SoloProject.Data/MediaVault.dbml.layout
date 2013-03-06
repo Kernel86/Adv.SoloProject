@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClasses1">
+  <DataContextMoniker Name="/MediaVaultDataContext" />
+  <nestedChildShapes>
+    <classShape Id="6e66ef55-b313-4ebd-9b5b-7c25fa6d787b" absoluteBounds="0.5, 0.5, 2, 3.1170068359375">
+      <DataClassMoniker Name="/MediaVaultDataContext/tblCustomer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="de185d84-a435-48b5-acc1-1f137c35ade3" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e0cbf3ad-ea47-4840-ab77-9c04d95ccbda" absoluteBounds="2.625, 0.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/MediaVaultDataContext/tblMedia" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4667ea54-d2e5-428d-9f57-e05518710c2e" absoluteBounds="2.6399999999999997, 0.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2cae71ef-b54f-4a92-94de-2ab17328414a" absoluteBounds="2.625, 3.875, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/MediaVaultDataContext/tblFormat" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cca77ab7-0f57-4914-96ec-aa2f9807e735" absoluteBounds="2.6399999999999997, 4.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3192e1f5-5ae3-4930-a684-ed5d13bccd44" absoluteBounds="2.625, 1.875, 2, 1.9631982421875">
+      <DataClassMoniker Name="/MediaVaultDataContext/tblMediaItem" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d3150467-604b-4c07-af11-ec8feb22418a" absoluteBounds="2.64, 2.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="71ea4a29-71f8-43a2-ba79-f31a1386ccf0" absoluteBounds="2.625, 5.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/MediaVaultDataContext/tblMediaItemPricing" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6f853ecb-2b06-4ff3-8c51-c9e97e5abeb5" absoluteBounds="2.6399999999999997, 5.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

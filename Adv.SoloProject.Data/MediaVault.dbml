@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DBNovak" Class="MediaVaultDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=vintagesylvania.net,10433;Initial Catalog=DBNovak;Persist Security Info=True;User ID=CMLogin" SettingsObjectName="Adv.SoloProject.Data.Properties.Settings" SettingsPropertyName="DBNovakConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblCustomer" Member="tblCustomers">
+    <Type Name="tblCustomer">
+      <Column Name="Customer_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(48)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(24)" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="Zip" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CustomerStatus_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblMedia" Member="tblMedias">
+    <Type Name="tblMedia">
+      <Column Name="Media_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ReleaseDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblFormat" Member="tblFormats">
+    <Type Name="tblFormat">
+      <Column Name="Format_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblMediaItem" Member="tblMediaItems">
+    <Type Name="tblMediaItem">
+      <Column Name="MediaItem_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvetoryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Media_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MediaItemState_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MediaItemPricingId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Format_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblMediaItemPricing" Member="tblMediaItemPricings">
+    <Type Name="tblMediaItemPricing">
+      <Column Name="MediaItemPricing_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

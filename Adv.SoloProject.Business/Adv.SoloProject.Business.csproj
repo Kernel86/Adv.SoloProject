@@ -55,6 +55,8 @@
     <Compile Include="CFormats.cs" />
     <Compile Include="CMedia.cs" />
     <Compile Include="CMediaItem.cs" />
+    <Compile Include="CMediaItemDisplay.cs" />
+    <Compile Include="CMediaItemDisplays.cs" />
     <Compile Include="CMediaItemPricing.cs" />
     <Compile Include="CMediaItemPricings.cs" />
     <Compile Include="CMediaItems.cs" />
@@ -63,6 +65,8 @@
     <Compile Include="CRentalItem.cs" />
     <Compile Include="CRentalItems.cs" />
     <Compile Include="CRentals.cs" />
+    <Compile Include="CStateCode.cs" />
+    <Compile Include="CStateCodes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -35,15 +35,38 @@
       <Column Name="InvetoryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Media_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MediaItemState_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="MediaItemPricingId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MediaItemPricing_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Format_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.tblMediaItemPricing" Member="tblMediaItemPricings">
     <Type Name="tblMediaItemPricing">
       <Column Name="MediaItemPricing_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
-      <Column Name="Price" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Length" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.tblStateCodes" Member="tblStateCodes">
+    <Type Name="tblStateCode">
+      <Column Name="State_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.SP_GetMediaItemDisplay" Method="SP_GetMediaItemDisplay">
+    <ElementType Name="SP_GetMediaItemDisplayResult">
+      <Column Name="MediaItem_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MediaItemPricing_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Barcode" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="ReleaseDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Format" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="InvetoryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Inventory" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="Pricing" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Length" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

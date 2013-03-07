@@ -64,26 +64,23 @@
         </Grid>
 
         <Grid Name="gridManagement" Visibility="Visible">
-            <Button Content="Formats" Margin="306,29,0,0" Name="btnManagementFormats" HorizontalAlignment="Left" Width="111" Height="23" VerticalAlignment="Top" Click="btnManagementFormats_Click" />
-            <Button Content="Pricing Categories" Height="23" HorizontalAlignment="Left" Margin="440,29,0,0" Name="btmManagementPricing" VerticalAlignment="Top" Width="111" Click="btmManagementPricing_Click" />
             <Button Content="Movies" Height="23" HorizontalAlignment="Left" Margin="169,29,0,0" Name="btnManagementMovies" VerticalAlignment="Top" Width="111" Click="btnManagementMovies_Click" />
-            <DataGrid AutoGenerateColumns="True" Margin="12,58,251,58" Name="dgManagement" />
+            <Button Content="Formats" Margin="306,29,0,0" Name="btnManagementFormats" HorizontalAlignment="Left" Width="111" Height="23" VerticalAlignment="Top" Click="btnManagementFormats_Click" />
+            <Button Content="Pricing Categories" Height="23" HorizontalAlignment="Left" Margin="440,29,0,0" Name="btnManagementPricing" VerticalAlignment="Top" Width="111" Click="btnManagementPricing_Click" />
+            
+            <DataGrid AutoGenerateColumns="True" Margin="12,58,251,58" Name="dgManagement" SelectionChanged="dgManagement_SelectionChanged" HorizontalAlignment="Stretch" AlternatingRowBackground="#0A000000" SelectionUnit="FullRow" />
             <GroupBox Header="Movie Information" Height="265" HorizontalAlignment="Right" Margin="0,58,12,0" Name="gbMovies" VerticalAlignment="Top" Width="233" Visibility="Visible">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="76*" />
-                        <ColumnDefinition Width="34*" />
-                        <ColumnDefinition Width="111*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Release Date:" Height="28" HorizontalAlignment="Left" Margin="6,34,0,0" Name="label25" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <DatePicker Height="25" HorizontalAlignment="Left" Margin="12,35,0,0" Name="dpManagementMovieReleaseDate" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2" />
-                    <Label Content="Title:" Height="28" HorizontalAlignment="Left" Margin="52,4,0,0" Name="label26" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <TextBox Height="23" HorizontalAlignment="Right" Margin="0,6,13,0" Name="txtManagementMovieTitle" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2" />
-                    <Button Content="Manage Copies" Height="23" HorizontalAlignment="Left" Margin="1,208,0,0" Name="btnManagementMovieManageCopies" VerticalAlignment="Top" Width="97" Grid.Column="2" />
-                    <Button Content="New" Height="23" HorizontalAlignment="Left" Margin="1,66,0,0" Name="btnManagementMoveNew" VerticalAlignment="Top" Width="97" Grid.Column="2" Click="btnManagementMoveNew_Click" />
-                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="23,95,0,0" Name="btnManagementMovieDelete" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnManagementMovieDelete_Click" />
-                    <Label Content="Total Copies:" Height="28" HorizontalAlignment="Left" Margin="9,177,0,0" Name="label27" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <TextBox Height="23" HorizontalAlignment="Right" Margin="0,179,13,0" Name="txtManagementMovieCopies" VerticalAlignment="Top" Width="120" TextAlignment="Right" IsReadOnly="True" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2" />
+                    <Label Content="Title:" Height="28" HorizontalAlignment="Left" Margin="59,4,0,0" Name="label26" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                    <TextBox Height="23" HorizontalAlignment="Right" Margin="0,6,6,0" Name="txtManagementMovieTitle" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2" />
+                    <Label Content="Release Date:" Height="28" HorizontalAlignment="Left" Margin="13,34,0,0" Name="label25" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                    <DatePicker Height="25" HorizontalAlignment="Left" Margin="95,0,0,183" Name="dpManagementMovieReleaseDate" VerticalAlignment="Bottom" Width="120" IsTabStop="True" />
+                    <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="140,65,0,0" Name="btnManagementMovieNew" VerticalAlignment="Top" Width="75" Click="btnManagementMovieNew_Click" />
+                    <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="140,94,0,0" Name="btnManagementMovieClear" VerticalAlignment="Top" Width="75" Click="btnManagementMovieClear_Click" />
+                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="140,150,0,0" Name="btnManagementMovieDelete" VerticalAlignment="Top" Width="75" Click="btnManagementMovieDelete_Click" />
+                    <Button Content="Manage Copies" Height="23" HorizontalAlignment="Left" Margin="118,208,0,0" Name="btnManagementMovieManageCopies" VerticalAlignment="Top" Width="97" Click="btnManagementMovieManageCopies_Click" />
+                    <Label Content="Total Copies:" Height="28" HorizontalAlignment="Left" Margin="16,177,0,0" Name="label27" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                    <TextBox Height="23" HorizontalAlignment="Right" Margin="0,179,6,0" Name="txtManagementMovieCopies" VerticalAlignment="Top" Width="120" TextAlignment="Right" IsReadOnly="True" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="12,148,0,0" Name="txtManagementMovieId" VerticalAlignment="Top" Width="120" Grid.Column="1" Visibility="Hidden" Grid.ColumnSpan="2" />
                 </Grid>
             </GroupBox>
@@ -91,8 +88,9 @@
                 <Grid>
                     <Label Content="Description:" Height="28" HorizontalAlignment="Left" Margin="20,4,0,0" Name="label28" VerticalAlignment="Top" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="95,6,0,0" Name="txtManagementFormatDescription" VerticalAlignment="Top" Width="120" />
-                    <Button Content="New" Height="23" HorizontalAlignment="Left" Margin="140,35,0,0" Name="btnManagementFormatNew" VerticalAlignment="Top" Width="75" />
-                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="140,64,0,0" Name="btnManagementFormatDelete" VerticalAlignment="Top" Width="75" />
+                    <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="140,35,0,0" Name="btnManagementFormatNew" VerticalAlignment="Top" Width="75" Click="btnManagementFormatNew_Click" />
+                    <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="140,64,0,0" Name="btnManagementFormatClear" VerticalAlignment="Top" Width="75" Click="btnManagementFormatClear_Click" />
+                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="140,213,0,0" Name="btnManagementFormatDelete" VerticalAlignment="Top" Width="75" Click="btnManagementFormatDelete_Click" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="95,213,0,0" Name="txtManagementFormatId" VerticalAlignment="Top" Width="120" Visibility="Hidden" />
                 </Grid>
             </GroupBox>
@@ -100,11 +98,14 @@
                 <Grid>
                     <Label Content="Description:" Height="28" HorizontalAlignment="Left" Margin="20,4,0,0" Name="label29" VerticalAlignment="Top" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="95,6,0,0" Name="txtManagementPricingDescription" VerticalAlignment="Top" Width="120" />
-                    <Button Content="New" Height="23" HorizontalAlignment="Left" Margin="140,64,0,0" Name="btnManagementPricingNew" VerticalAlignment="Top" Width="75" />
-                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="140,93,0,0" Name="btnManagementPricingDelete" VerticalAlignment="Top" Width="75" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="95,213,0,0" Name="txtManagementPricingId" VerticalAlignment="Top" Width="120" Visibility="Hidden" />
                     <Label Content="Price:" Height="28" HorizontalAlignment="Left" Margin="55,33,0,0" Name="label30" VerticalAlignment="Top" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="95,35,0,0" Name="txtManagementPricingPrice" VerticalAlignment="Top" Width="120" TextAlignment="Right" />
+                    <Label Content="Length:" Height="28" HorizontalAlignment="Left" Margin="44,62,0,0" Name="label31" VerticalAlignment="Top" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="95,64,0,0" Name="txtManagementPricingLength" TextAlignment="Right" VerticalAlignment="Top" Width="120" />
+                    <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="140,93,0,0" Name="btnManagementPricingNew" VerticalAlignment="Top" Width="75" Click="btnManagementPricingNew_Click" />
+                    <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="140,122,0,0" Name="btnManagementPricingClear" VerticalAlignment="Top" Width="75" Click="btnManagementPricingClear_Click" />
+                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="140,213,0,0" Name="btnManagementPricingDelete" VerticalAlignment="Top" Width="75" Click="btnManagementPricingDelete_Click" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="95,213,0,0" Name="txtManagementPricingId" VerticalAlignment="Top" Width="120" Visibility="Hidden" />
                 </Grid>
             </GroupBox>
         </Grid>
@@ -119,17 +120,17 @@
             <Label Content="City:" Height="28" HorizontalAlignment="Left" Margin="163,154,0,0" Name="label8" VerticalAlignment="Top" />
             <TextBox Height="23" HorizontalAlignment="Left" Margin="198,156,0,0" Name="txtCity" VerticalAlignment="Top" Width="120" />
             <Label Content="State:" Height="28" HorizontalAlignment="Left" Margin="327,154,0,0" Name="label9" VerticalAlignment="Top" />
+            <ComboBox Height="23" HorizontalAlignment="Left" Margin="369,156,0,0" Name="cbState" VerticalAlignment="Top" Width="79" ItemsSource="{Binding}" />
             <Label Content="Zip Code:" Height="28" HorizontalAlignment="Left" Margin="463,154,0,0" Name="label10" VerticalAlignment="Top" />
             <TextBox Height="23" HorizontalAlignment="Left" Margin="525,156,0,0" Name="txtZipCode" VerticalAlignment="Top" Width="71" />
+            <Label Content="Date of Birth:" Height="28" HorizontalAlignment="Left" Margin="116,179,0,0" Name="label13" VerticalAlignment="Top" />
+            <DatePicker Height="25" HorizontalAlignment="Left" Margin="198,180,0,0" Name="dpDOB" VerticalAlignment="Top" Width="168" />
             <Label Content="Phone Number:" Height="28" HorizontalAlignment="Left" Margin="103,203,0,0" Name="label11" VerticalAlignment="Top" />
             <TextBox Height="23" HorizontalAlignment="Left" Margin="198,205,0,0" Name="txtPhoneNumber" VerticalAlignment="Top" Width="136" />
             <Label Content="Email Address:" Height="28" HorizontalAlignment="Left" Margin="347,203,0,0" Name="label12" VerticalAlignment="Top" />
             <TextBox Height="23" Margin="436,205,0,0" Name="txtEmailAddress" VerticalAlignment="Top" HorizontalAlignment="Left" Width="160" />
-            <Label Content="Date of Birth:" Height="28" HorizontalAlignment="Left" Margin="116,179,0,0" Name="label13" VerticalAlignment="Top" />
-            <ComboBox Height="23" HorizontalAlignment="Left" Margin="369,156,0,0" Name="cbState" VerticalAlignment="Top" Width="79" ItemsSource="{Binding}" />
             <Button Content="Add Customer" Height="23" HorizontalAlignment="Left" Margin="297,237,0,0" Name="btnAddCustomer" VerticalAlignment="Top" Width="106" Click="btnAddCustomer_Click" />
             <Label Content="New Customer" Height="47" HorizontalAlignment="Left" Margin="265,43,0,0" Name="label14" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" />
-            <DatePicker Height="25" HorizontalAlignment="Left" Margin="198,180,0,0" Name="dpDOB" VerticalAlignment="Top" Width="168" />
             <Button Content="Cancel" Height="23" HorizontalAlignment="Left" Margin="297,286,0,0" Name="btnNewCustomerCancel" VerticalAlignment="Top" Width="106" Click="btnNewCustomerCancel_Click" />
         </Grid>
 

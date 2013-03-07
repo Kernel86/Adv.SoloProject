@@ -7,13 +7,13 @@ using Adv.SoloProject.Data;
 
 namespace Adv.SoloProject.Business
 {
-    public class CFormats
+    public class CStateCodes
     {
         // Private Fields
-        private List<CFormat> _glItems;
+        private List<CStateCode> _glItems;
 
         // Public Properties
-        public List<CFormat> Items
+        public List<CStateCode> Items
         {
             get { return _glItems; }
             set { _glItems = value; }
@@ -24,34 +24,34 @@ namespace Adv.SoloProject.Business
             get { return _glItems.Count; }
         }
 
-        public CFormat this[int index]
+        public CStateCode this[int index]
         {
             get { return _glItems[index]; }
             set { _glItems[index] = value; }
         }
 
         // Public Constructors
-        public CFormats()
+        public CStateCodes()
         {
-            _glItems = new List<CFormat>();
+            _glItems = new List<CStateCode>();
         }
 
         // Events
-        public event EventHandler FormatsChanged;
+        public event EventHandler StateCodesChanged;
 
         // Public Methods
-        public void Add(CFormat oItem)
+        public void Add(CStateCode oItem)
         {
             _glItems.Add(oItem);
-            if (FormatsChanged != null)
-                FormatsChanged(this, new EventArgs());
+            if (StateCodesChanged != null)
+                StateCodesChanged(this, new EventArgs());
         }
 
         public void RemoveAt(int iIndex)
         {
             _glItems.RemoveAt(iIndex);
-            if (FormatsChanged != null)
-                FormatsChanged(this, new EventArgs());
+            if (StateCodesChanged != null)
+                StateCodesChanged(this, new EventArgs());
         }
 
         public void Load()
@@ -59,13 +59,13 @@ namespace Adv.SoloProject.Business
             MediaVaultDataContext oDc = new MediaVaultDataContext();
 
             // Select customers using LINQ
-            var otblFormats = from c in oDc.tblFormats select c;
+            var otblStateCodes = from c in oDc.tblStateCodes select c;
 
             // Fill generic list of customers
-            foreach (tblFormat otblFormat in otblFormats)
+            foreach (tblStateCode otblStateCode in otblStateCodes)
             {
-                CFormat oFormat = new CFormat(otblFormat);
-                _glItems.Add(oFormat);
+                CStateCode oStateCode = new CStateCode(otblStateCode);
+                _glItems.Add(oStateCode);
             }
 
             oDc = null;

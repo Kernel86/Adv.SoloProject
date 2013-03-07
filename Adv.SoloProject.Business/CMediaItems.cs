@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Adv.SoloProject.Data;
+
 namespace Adv.SoloProject.Business
 {
     public class CMediaItems
@@ -41,15 +43,32 @@ namespace Adv.SoloProject.Business
         public void Add(CMediaItem oItem)
         {
             _glItems.Add(oItem);
-            if (!MediaItemsChanged.Equals(null))
+            if (MediaItemsChanged != null)
                 MediaItemsChanged(this, new EventArgs());
         }
 
         public void RemoveAt(int iIndex)
         {
             _glItems.RemoveAt(iIndex);
-            if (!MediaItemsChanged.Equals(null))
+            if (MediaItemsChanged != null)
                 MediaItemsChanged(this, new EventArgs());
+        }
+
+        public void Load()
+        {
+            MediaVaultDataContext oDc = new MediaVaultDataContext();
+
+            // Select MediaItems using LINQ
+            var otblMediaItems = from c in oDc.tblMediaItems select c;
+
+            // Fill generic list of MediaItems
+            foreach (tblMediaItem otblMediaItem in otblMediaItems)
+            {
+                CMediaItem oMediaItem = new CMediaItem(otblMediaItem);
+                _glItems.Add(oMediaItem);
+            }
+
+            oDc = null;
         }
     }
 }

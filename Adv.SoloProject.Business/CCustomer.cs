@@ -155,15 +155,16 @@ namespace Adv.SoloProject.Business
                                             where c.Customer_Id == CustomerId
                                             select c).FirstOrDefault();
 
-                FirstName = otblCustomer.FirstName;
-                LastName = otblCustomer.LastName;
-                Address = otblCustomer.Address;
-                City = otblCustomer.City;
-                State = otblCustomer.State;
-                Zip = otblCustomer.Zip;
-                Phone = otblCustomer.Phone;
-                Email = otblCustomer.Email;
-                CustomerStatusId = otblCustomer.CustomerStatus_Id;
+                otblCustomer.FirstName = FirstName;
+                otblCustomer.LastName = LastName;
+                otblCustomer.Address = Address;
+                otblCustomer.City = City;
+                otblCustomer.State = State;
+                otblCustomer.Zip = Zip;
+                otblCustomer.Phone = Phone;
+                otblCustomer.Email = Email;
+                otblCustomer.DateOfBirth = DateOfBirth;
+                otblCustomer.CustomerStatus_Id = CustomerStatusId;
 
                 oDc.SubmitChanges();
                 oDc = null;

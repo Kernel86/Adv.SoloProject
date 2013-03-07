@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLScripts", "SQLScripts", 
 		Misc\SQLScripts\tblRental.sql = Misc\SQLScripts\tblRental.sql
 		Misc\SQLScripts\tblRentalItem.sql = Misc\SQLScripts\tblRentalItem.sql
 		Misc\SQLScripts\tblRentalItemStatus.sql = Misc\SQLScripts\tblRentalItemStatus.sql
+		Misc\SQLScripts\tblStateCodes.sql = Misc\SQLScripts\tblStateCodes.sql
 	EndProjectSection
 EndProject
 Global

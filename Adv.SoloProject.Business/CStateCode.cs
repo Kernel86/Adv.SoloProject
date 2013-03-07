@@ -7,43 +7,43 @@ using Adv.SoloProject.Data;
 
 namespace Adv.SoloProject.Business
 {
-    public class CMedia
+    public class CStateCode
     {
         // Private Fields
-        private int _iMediaId;
-        private DateTime _dtReleaseDate;
-        private string _sTitle;
+        private int _iStateCodeId;
+        private string _sCode;
+        private string _sDescription;
 
         // Public Properties
-        public int MediaId
+        public int StateCodeId
         {
-            get { return _iMediaId; }
-            set { _iMediaId = value; }
+          get { return _iStateCodeId; }
+          set { _iStateCodeId = value; }
         }
 
-        public DateTime ReleaseDate
+        public string Code
         {
-            get { return _dtReleaseDate; }
-            set { _dtReleaseDate = value; }
+          get { return _sCode; }
+          set { _sCode = value; }
         }
 
-        public string Title
+        public string Description
         {
-            get { return _sTitle; }
-            set { _sTitle = value; }
+          get { return _sDescription; }
+          set { _sDescription = value; }
         }
 
         // Constructors
-        public CMedia()
+        public CStateCode()
         {
 
         }
 
-        public CMedia(tblMedia otblMedia)
+        public CStateCode(tblStateCode otblStateCode)
         {
-            _iMediaId = otblMedia.Media_Id;
-            _dtReleaseDate = (DateTime)otblMedia.ReleaseDate;
-            _sTitle = otblMedia.Title;
+            _iStateCodeId = otblStateCode.State_Id;
+            _sCode = otblStateCode.Code;
+            _sDescription = otblStateCode.Description;
         }
 
         // Public Methods
@@ -53,13 +53,13 @@ namespace Adv.SoloProject.Business
             {
                 MediaVaultDataContext oDc = new MediaVaultDataContext();
 
-                tblMedia otblMedia = new tblMedia();
+                tblStateCode otblStateCode = new tblStateCode();
 
-                otblMedia.Media_Id = MediaId;
-                otblMedia.ReleaseDate = ReleaseDate;
-                otblMedia.Title = Title;
+                otblStateCode.State_Id = StateCodeId;
+                otblStateCode.Code = Code;
+                otblStateCode.Description = Description;
 
-                oDc.tblMedias.InsertOnSubmit(otblMedia);
+                oDc.tblStateCodes.InsertOnSubmit(otblStateCode);
                 oDc.SubmitChanges();
                 oDc = null;
             }
@@ -75,12 +75,12 @@ namespace Adv.SoloProject.Business
             {
                 MediaVaultDataContext oDc = new MediaVaultDataContext();
 
-                tblMedia otblMedia = (from c in oDc.tblMedias
-                                            where c.Media_Id == MediaId
+                tblStateCode otblStateCode = (from c in oDc.tblStateCodes
+                                            where c.State_Id == StateCodeId
                                             select c).FirstOrDefault();
 
-                otblMedia.ReleaseDate = ReleaseDate;
-                otblMedia.Title = Title;
+                otblStateCode.Code = Code;
+                otblStateCode.Description = Description;
 
                 oDc.SubmitChanges();
                 oDc = null;
@@ -97,12 +97,12 @@ namespace Adv.SoloProject.Business
             {
                 MediaVaultDataContext oDc = new MediaVaultDataContext();
 
-                tblMedia otblMedia = (from c in oDc.tblMedias where c.Media_Id == MediaId select c).FirstOrDefault();
+                tblStateCode otblStateCode = (from c in oDc.tblStateCodes where c.State_Id == StateCodeId select c).FirstOrDefault();
 
-                oDc.tblMedias.DeleteOnSubmit(otblMedia);
+                oDc.tblStateCodes.DeleteOnSubmit(otblStateCode);
                 oDc.SubmitChanges();
 
-                otblMedia = null;
+                otblStateCode = null;
                 oDc = null;
             }
             catch (Exception ex)

@@ -1,8 +1,9 @@
 
 CREATE TABLE [dbo].[tblMediaItemPricing] (
   [MediaItemPricing_Id] INT NOT NULL IDENTITY(0,1),
-  [Description] VARCHAR(16) NULL,
-  [Price] DECIMAL(2) NULL,
+  [Description] VARCHAR(16) NOT NULL,
+  [Price] DECIMAL(8,2) NOT NULL,
+  [Length] INT NOT NULL,
  CONSTRAINT [PK_tblMediaItemPricing] PRIMARY KEY CLUSTERED 
 (
 	[MediaItemPricing_Id] ASC

@@ -45,6 +45,9 @@ namespace Adv.SoloProject.Data
     partial void InserttblMediaItemPricing(tblMediaItemPricing instance);
     partial void UpdatetblMediaItemPricing(tblMediaItemPricing instance);
     partial void DeletetblMediaItemPricing(tblMediaItemPricing instance);
+    partial void InserttblStateCode(tblStateCode instance);
+    partial void UpdatetblStateCode(tblStateCode instance);
+    partial void DeletetblStateCode(tblStateCode instance);
     #endregion
 		
 		public MediaVaultDataContext() : 
@@ -115,6 +118,21 @@ namespace Adv.SoloProject.Data
 			{
 				return this.GetTable<tblMediaItemPricing>();
 			}
+		}
+		
+		public System.Data.Linq.Table<tblStateCode> tblStateCodes
+		{
+			get
+			{
+				return this.GetTable<tblStateCode>();
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_GetMediaItemDisplay")]
+		public ISingleResult<SP_GetMediaItemDisplayResult> SP_GetMediaItemDisplay()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<SP_GetMediaItemDisplayResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -654,7 +672,7 @@ namespace Adv.SoloProject.Data
 		
 		private int _MediaItemState_Id;
 		
-		private int _MediaItemPricingId;
+		private int _MediaItemPricing_Id;
 		
 		private int _Format_Id;
 		
@@ -670,8 +688,8 @@ namespace Adv.SoloProject.Data
     partial void OnMedia_IdChanged();
     partial void OnMediaItemState_IdChanging(int value);
     partial void OnMediaItemState_IdChanged();
-    partial void OnMediaItemPricingIdChanging(int value);
-    partial void OnMediaItemPricingIdChanged();
+    partial void OnMediaItemPricing_IdChanging(int value);
+    partial void OnMediaItemPricing_IdChanged();
     partial void OnFormat_IdChanging(int value);
     partial void OnFormat_IdChanged();
     #endregion
@@ -761,22 +779,22 @@ namespace Adv.SoloProject.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MediaItemPricingId", DbType="Int NOT NULL")]
-		public int MediaItemPricingId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MediaItemPricing_Id", DbType="Int NOT NULL")]
+		public int MediaItemPricing_Id
 		{
 			get
 			{
-				return this._MediaItemPricingId;
+				return this._MediaItemPricing_Id;
 			}
 			set
 			{
-				if ((this._MediaItemPricingId != value))
+				if ((this._MediaItemPricing_Id != value))
 				{
-					this.OnMediaItemPricingIdChanging(value);
+					this.OnMediaItemPricing_IdChanging(value);
 					this.SendPropertyChanging();
-					this._MediaItemPricingId = value;
-					this.SendPropertyChanged("MediaItemPricingId");
-					this.OnMediaItemPricingIdChanged();
+					this._MediaItemPricing_Id = value;
+					this.SendPropertyChanged("MediaItemPricing_Id");
+					this.OnMediaItemPricing_IdChanged();
 				}
 			}
 		}
@@ -832,7 +850,9 @@ namespace Adv.SoloProject.Data
 		
 		private string _Description;
 		
-		private System.Nullable<decimal> _Price;
+		private decimal _Price;
+		
+		private int _Length;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -842,8 +862,10 @@ namespace Adv.SoloProject.Data
     partial void OnMediaItemPricing_IdChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
-    partial void OnPriceChanging(System.Nullable<decimal> value);
+    partial void OnPriceChanging(decimal value);
     partial void OnPriceChanged();
+    partial void OnLengthChanging(int value);
+    partial void OnLengthChanged();
     #endregion
 		
 		public tblMediaItemPricing()
@@ -871,7 +893,7 @@ namespace Adv.SoloProject.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(16)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
 		public string Description
 		{
 			get
@@ -891,8 +913,8 @@ namespace Adv.SoloProject.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(2,0)")]
-		public System.Nullable<decimal> Price
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(8,2) NOT NULL")]
+		public decimal Price
 		{
 			get
 			{
@@ -907,6 +929,26 @@ namespace Adv.SoloProject.Data
 					this._Price = value;
 					this.SendPropertyChanged("Price");
 					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Length", DbType="Int NOT NULL")]
+		public int Length
+		{
+			get
+			{
+				return this._Length;
+			}
+			set
+			{
+				if ((this._Length != value))
+				{
+					this.OnLengthChanging(value);
+					this.SendPropertyChanging();
+					this._Length = value;
+					this.SendPropertyChanged("Length");
+					this.OnLengthChanged();
 				}
 			}
 		}
@@ -928,6 +970,322 @@ namespace Adv.SoloProject.Data
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblStateCodes")]
+	public partial class tblStateCode : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _State_Id;
+		
+		private string _Code;
+		
+		private string _Description;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnState_IdChanging(int value);
+    partial void OnState_IdChanged();
+    partial void OnCodeChanging(string value);
+    partial void OnCodeChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public tblStateCode()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int State_Id
+		{
+			get
+			{
+				return this._State_Id;
+			}
+			set
+			{
+				if ((this._State_Id != value))
+				{
+					this.OnState_IdChanging(value);
+					this.SendPropertyChanging();
+					this._State_Id = value;
+					this.SendPropertyChanged("State_Id");
+					this.OnState_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="VarChar(2)")]
+		public string Code
+		{
+			get
+			{
+				return this._Code;
+			}
+			set
+			{
+				if ((this._Code != value))
+				{
+					this.OnCodeChanging(value);
+					this.SendPropertyChanging();
+					this._Code = value;
+					this.SendPropertyChanged("Code");
+					this.OnCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(32)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	public partial class SP_GetMediaItemDisplayResult
+	{
+		
+		private int _MediaItem_Id;
+		
+		private int _MediaItemPricing_Id;
+		
+		private string _Barcode;
+		
+		private string _Title;
+		
+		private System.Nullable<System.DateTime> _ReleaseDate;
+		
+		private string _Format;
+		
+		private System.Nullable<System.DateTime> _InvetoryDate;
+		
+		private string _Inventory;
+		
+		private string _Pricing;
+		
+		private decimal _Price;
+		
+		private int _Length;
+		
+		public SP_GetMediaItemDisplayResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MediaItem_Id", DbType="Int NOT NULL")]
+		public int MediaItem_Id
+		{
+			get
+			{
+				return this._MediaItem_Id;
+			}
+			set
+			{
+				if ((this._MediaItem_Id != value))
+				{
+					this._MediaItem_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MediaItemPricing_Id", DbType="Int NOT NULL")]
+		public int MediaItemPricing_Id
+		{
+			get
+			{
+				return this._MediaItemPricing_Id;
+			}
+			set
+			{
+				if ((this._MediaItemPricing_Id != value))
+				{
+					this._MediaItemPricing_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Barcode", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Barcode
+		{
+			get
+			{
+				return this._Barcode;
+			}
+			set
+			{
+				if ((this._Barcode != value))
+				{
+					this._Barcode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(64)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this._Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReleaseDate", DbType="Date")]
+		public System.Nullable<System.DateTime> ReleaseDate
+		{
+			get
+			{
+				return this._ReleaseDate;
+			}
+			set
+			{
+				if ((this._ReleaseDate != value))
+				{
+					this._ReleaseDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Format", DbType="VarChar(16)")]
+		public string Format
+		{
+			get
+			{
+				return this._Format;
+			}
+			set
+			{
+				if ((this._Format != value))
+				{
+					this._Format = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvetoryDate", DbType="Date")]
+		public System.Nullable<System.DateTime> InvetoryDate
+		{
+			get
+			{
+				return this._InvetoryDate;
+			}
+			set
+			{
+				if ((this._InvetoryDate != value))
+				{
+					this._InvetoryDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Inventory", DbType="VarChar(16)")]
+		public string Inventory
+		{
+			get
+			{
+				return this._Inventory;
+			}
+			set
+			{
+				if ((this._Inventory != value))
+				{
+					this._Inventory = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pricing", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
+		public string Pricing
+		{
+			get
+			{
+				return this._Pricing;
+			}
+			set
+			{
+				if ((this._Pricing != value))
+				{
+					this._Pricing = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(8,2) NOT NULL")]
+		public decimal Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Length", DbType="Int NOT NULL")]
+		public int Length
+		{
+			get
+			{
+				return this._Length;
+			}
+			set
+			{
+				if ((this._Length != value))
+				{
+					this._Length = value;
+				}
 			}
 		}
 	}

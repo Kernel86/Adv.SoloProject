@@ -25,7 +25,10 @@ namespace Adv.SoloProject.UI
         CMedias _oMedias;
         CFormats _oFormats;
         CMediaItems _oMediaItems;
+        public static CMediaItemDisplays _oMediaItemDisplays;
+        wpfDlgMediaItems _wpfDlgMediaItems;
         CMediaItemPricings _oMediaItemPricings;
+        CStateCodes _oStateCodes;
 
         public MainWindow()
         {
@@ -36,14 +39,36 @@ namespace Adv.SoloProject.UI
         {
             try
             {
+                // Populate Customers
                 _oCustomers = new CCustomers();
                 _oCustomers.Load();
-
                 dgCustomers.ItemsSource = null;
                 dgCustomers.ItemsSource = _oCustomers.Items;
 
+                // Populate Media
                 _oMedias = new CMedias();
                 _oMedias.Load();
+
+                // Populate Formats
+                _oFormats = new CFormats();
+                _oFormats.Load();
+
+                // Populate MediaItemPricings
+                _oMediaItemPricings = new CMediaItemPricings();
+                _oMediaItemPricings.Load();
+
+                // Populate MediaItems
+                _oMediaItems = new CMediaItems();
+                _oMediaItems.Load();
+                _oMediaItemDisplays = new CMediaItemDisplays();
+                _oMediaItemDisplays.Load();
+
+                // Populate StateCodes
+                _oStateCodes = new CStateCodes();
+                _oStateCodes.Load();
+                cbState.ItemsSource = _oStateCodes.Items;
+                cbState.DisplayMemberPath = "Description";
+                cbState.SelectedValuePath = "Code";
 
                 gridManagement.Visibility = gridRental.Visibility = gridNewCustomer.Visibility = Visibility.Hidden;
                 gridHome.Visibility = Visibility.Visible;
@@ -52,13 +77,31 @@ namespace Adv.SoloProject.UI
             }
             catch (Exception ex)
             {
-                lblStatus.Content = ex.Message;
+                lblStatus.Content = "Error: " + ex.Message;
             }
         }
 
-        private void mnuExit_Click(object sender, RoutedEventArgs e)
+    // Menu Funcitons
+        private void mnuExit_Click(object sender, RoutedEventArgs e) // File > Exit
         {
             Application.Current.Shutdown(0);
+        }
+        private void mnuAbout_Click(object sender, RoutedEventArgs e) // Help > About
+        {
+            wpfDlgAbout wpfAbout = new wpfDlgAbout();
+            wpfAbout.ShowDialog();
+            wpfAbout = null;
+        }
+
+        private void dgCustomers_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Hide primary key fields
+            dgCustomers.Columns[0].Visibility = Visibility.Hidden;
+            dgCustomers.Columns[11].Visibility = Visibility.Hidden;
+
+            // Format birth dates
+            DataGridTextColumn dgTc = dgCustomers.Columns[10] as DataGridTextColumn;
+            dgTc.Binding.StringFormat = "{0:dd/MM/yyy}";
         }
 
         private void btnSelectCustomer_Click(object sender, RoutedEventArgs e)
@@ -96,8 +139,7 @@ namespace Adv.SoloProject.UI
                 oCustomer.LastName = txtLastName.Text;
                 oCustomer.Address = txtAddress.Text;
                 oCustomer.City = txtCity.Text;
-              //oCustomer.State = cbState.SelectedIndex;
-                oCustomer.State = "UN";
+                oCustomer.State = (string)cbState.SelectedValue;
                 oCustomer.Zip = txtZipCode.Text;
                 oCustomer.Phone = txtPhoneNumber.Text;
                 oCustomer.Email = txtEmailAddress.Text;
@@ -106,7 +148,6 @@ namespace Adv.SoloProject.UI
 
                 oCustomer.Insert();
                 _oCustomers.Add(oCustomer);
-                //oCustomer = null;
 
                 dgCustomers.ItemsSource = null;
                 dgCustomers.ItemsSource = _oCustomers.Items;
@@ -143,33 +184,13 @@ namespace Adv.SoloProject.UI
 
         private void btnMovieLookup_Click(object sender, RoutedEventArgs e)
         {
-
+            _wpfDlgMediaItems = new wpfDlgMediaItems();
+            _wpfDlgMediaItems.ShowDialog();
         }
 
         private void btnRentalReturn_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void btnManagementMovies_Click(object sender, RoutedEventArgs e)
-        {
-            gbFormats.Visibility = gbPricing.Visibility = Visibility.Hidden;
-            gbMovies.Visibility = Visibility.Visible;
-
-            dgManagement.ItemsSource = null;
-            dgManagement.ItemsSource = _oMedias.Items;
-        }
-
-        private void btnManagementFormats_Click(object sender, RoutedEventArgs e)
-        {
-            gbMovies.Visibility = gbPricing.Visibility = Visibility.Hidden;
-            gbFormats.Visibility = Visibility.Visible;
-        }
-
-        private void btmManagementPricing_Click(object sender, RoutedEventArgs e)
-        {
-            gbMovies.Visibility = gbFormats.Visibility = Visibility.Hidden;
-            gbPricing.Visibility = Visibility.Visible;
         }
 
         private void btnManagement_Click(object sender, RoutedEventArgs e)
@@ -179,11 +200,11 @@ namespace Adv.SoloProject.UI
                 gridHome.Visibility = Visibility.Hidden;
                 btnNewCustomer.IsEnabled = false;
 
-                gridManagement.Visibility = gbMovies.Visibility = Visibility.Visible;
+                gridManagement.Visibility = Visibility.Visible;
                 btnManagement.Content = "Home";
 
-                dgManagement.ItemsSource = null;
-                dgManagement.ItemsSource = _oMedias.Items;
+                // Load default page
+                btnManagementMovies_Click(sender, e);
             }
             else
             {
@@ -195,62 +216,299 @@ namespace Adv.SoloProject.UI
             }
         }
 
-        // Show About dialog
-        private void mnuAbout_Click(object sender, RoutedEventArgs e)
+        private void dgManagement_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            wpfDlgAbout wpfAbout = new wpfDlgAbout();
-            wpfAbout.ShowDialog();
-            wpfAbout = null;
+            if (dgManagement.SelectedIndex != -1)
+            {
+                if (gbMovies.IsVisible)
+                {
+                    txtManagementMovieId.Text = _oMedias[dgManagement.SelectedIndex].MediaId.ToString();
+                    txtManagementMovieTitle.Text = _oMedias[dgManagement.SelectedIndex].Title;
+                    dpManagementMovieReleaseDate.SelectedDate = _oMedias[dgManagement.SelectedIndex].ReleaseDate;
+                    btnManagementMovieNew.Content = "Update";
+                }
+                else if (gbFormats.IsVisible)
+                {
+                    txtManagementFormatId.Text = _oFormats[dgManagement.SelectedIndex].FormatId.ToString();
+                    txtManagementFormatDescription.Text = _oFormats[dgManagement.SelectedIndex].Description;
+                    btnManagementFormatNew.Content = "Update";
+                }
+                else if (gbPricing.IsVisible)
+                {
+                    txtManagementPricingId.Text = _oMediaItemPricings[dgManagement.SelectedIndex].MediaItemPricingId.ToString();
+                    txtManagementPricingDescription.Text = _oMediaItemPricings[dgManagement.SelectedIndex].Description;
+                    txtManagementPricingPrice.Text = _oMediaItemPricings[dgManagement.SelectedIndex].Price.ToString();
+                    txtManagementPricingLength.Text = _oMediaItemPricings[dgManagement.SelectedIndex].Length.ToString();
+                    btnManagementPricingNew.Content = "Update";
+                }
+            }
         }
 
-        // Create new movie
-        private void btnManagementMoveNew_Click(object sender, RoutedEventArgs e)
+    // Management - Media Item Buttons
+        private void btnManagementMovieManageCopies_Click(object sender, RoutedEventArgs e) // Select Media Item Management
+        {
+
+        }
+
+        #region "Management - Movie Buttons"
+    // Management - Movie Buttons
+        private void btnManagementMovies_Click(object sender, RoutedEventArgs e) // Select Movies
+        {
+            gbFormats.Visibility = gbPricing.Visibility = Visibility.Hidden;
+            gbMovies.Visibility = Visibility.Visible;
+            btnManagementMovieNew.Content = "Add";
+
+            // Set Media list as active
+            dgManagement.ItemsSource = null;
+            dgManagement.ItemsSource = _oMedias.Items;
+
+            // Hide primary key fields
+            dgManagement.Columns[0].Visibility = Visibility.Hidden;
+
+            // Format release dates
+            DataGridTextColumn dgTc = dgManagement.Columns[1] as DataGridTextColumn;
+            dgTc.Binding.StringFormat = "{0:dd/MM/yyy}";
+        }
+        private void btnManagementMovieNew_Click(object sender, RoutedEventArgs e)  // Add/Update Movie
         {
             try
             {
-                CMedia oMedia = new CMedia();
+                if ((string)btnManagementMovieNew.Content == "Add")
+                {
+                    // FIXME: Check for duplicates
+                    CMedia oMedia = new CMedia();
 
-                //oMedia.MediaId = 0;
-                oMedia.ReleaseDate = (DateTime)dpManagementMovieReleaseDate.SelectedDate;
-                oMedia.Title = txtManagementMovieTitle.Text;
+                    //oMedia.MediaId = 0; // Not Used
+                    oMedia.ReleaseDate = (DateTime)dpManagementMovieReleaseDate.SelectedDate;
+                    oMedia.Title = txtManagementMovieTitle.Text;
 
-                oMedia.Insert();
-                _oMedias.Add(oMedia);
+                    oMedia.Insert();
+                    _oMedias.Add(oMedia);
 
-                dgManagement.ItemsSource = null;
-                dgManagement.ItemsSource = _oMedias.Items;
+                    lblStatus.Content = "Record sucessfully added.";
+                }
+                else if ((string)btnManagementMovieNew.Content == "Update")
+                {
+                    if (_oMedias[dgManagement.SelectedIndex].MediaId.ToString() == txtManagementMovieId.Text)
+                    {
+                        _oMedias[dgManagement.SelectedIndex].ReleaseDate = (DateTime)dpManagementMovieReleaseDate.SelectedDate;
+                        _oMedias[dgManagement.SelectedIndex].Title = txtManagementMovieTitle.Text;
+
+                        _oMedias[dgManagement.SelectedIndex].Update();
+
+                        lblStatus.Content = "Record successfully updated.";
+                    }
+                    else
+                        throw new Exception("MediaId does not match, Update failed.");
+                }
+
+                // Call Movies initialization button (Handles formatting of DataGrid)
+                btnManagementMovies_Click(sender, e);
+
+                // Clear the form
+                btnManagementMovieClear_Click(sender, e);
             }
             catch (Exception ex)
             {
                 lblStatus.Content = "Error: " + ex.Message;
             }
         }
-
-        // Delete a movie
-        private void btnManagementMovieDelete_Click(object sender, RoutedEventArgs e)
+        private void btnManagementMovieDelete_Click(object sender, RoutedEventArgs e) // Delete Movie
         {
             try
             {
                 _oMedias[dgManagement.SelectedIndex].Delete();
                 _oMedias.RemoveAt(dgManagement.SelectedIndex);
 
-                dgManagement.ItemsSource = null; 
-                dgManagement.ItemsSource = _oMedias.Items;
+                lblStatus.Content = "Record sucessfully deleted.";
+
+                // Call Movies initialization button (Handles formatting of DataGrid)
+                btnManagementMovies_Click(sender, e);
             }
             catch (Exception ex)
             {
                 lblStatus.Content = "Error: " + ex.Message;
             }
         }
-
-        private void dgCustomers_Loaded(object sender, RoutedEventArgs e)
+        private void btnManagementMovieClear_Click(object sender, RoutedEventArgs e) // Clear Movie Fields
         {
-            dgCustomers.Columns[0].Visibility = Visibility.Hidden;
-            dgCustomers.Columns[11].Visibility = Visibility.Hidden;
-
-            // Format birth dates
-            DataGridTextColumn dgTc = dgCustomers.Columns[10] as DataGridTextColumn;
-            dgTc.Binding.StringFormat = "{0:dd/MM/yyy}";
+            txtManagementMovieId.Text = string.Empty;
+            txtManagementMovieTitle.Text = string.Empty;
+            txtManagementMovieCopies.Text = string.Empty;
+            dpManagementMovieReleaseDate.SelectedDate = DateTime.Now;
+            dgManagement.SelectedIndex = -1;
+            btnManagementMovieNew.Content = "Add";
         }
+        #endregion
+
+        #region "Management - Format Buttons"
+    // Management - Format Buttons
+        private void btnManagementFormats_Click(object sender, RoutedEventArgs e) // Select Format
+        {
+            gbMovies.Visibility = gbPricing.Visibility = Visibility.Hidden;
+            gbFormats.Visibility = Visibility.Visible;
+            btnManagementFormatNew.Content = "Add";
+
+            // Set Format list as active
+            dgManagement.ItemsSource = null;
+            dgManagement.ItemsSource = _oFormats.Items;
+
+            // Hide primary key fields
+            dgManagement.Columns[0].Visibility = Visibility.Hidden;
+        }
+        private void btnManagementFormatNew_Click(object sender, RoutedEventArgs e) // Add/Update Format
+        {
+            try
+            {
+                if ((string)btnManagementFormatNew.Content == "Add")
+                {
+                    CFormat oFormat = new CFormat();
+
+                    //oFormat.FormatId = 0; // not used
+                    oFormat.Description = txtManagementFormatDescription.Text;
+
+                    oFormat.Insert();
+                    _oFormats.Add(oFormat);
+
+                    lblStatus.Content = "Record successfully added.";
+                }
+                else if ((string)btnManagementFormatNew.Content == "Update")
+                {
+                    if (_oFormats[dgManagement.SelectedIndex].FormatId.ToString() == txtManagementFormatId.Text)
+                    {
+                        _oFormats[dgManagement.SelectedIndex].Description = txtManagementFormatDescription.Text;
+
+                        _oFormats[dgManagement.SelectedIndex].Update();
+
+                        lblStatus.Content = "Record successfully updated.";
+                    }
+                    else
+                        throw new Exception("FormatId does not match, Update failed.");
+                }
+
+                // Call Format initialization button (Handles formatting of DataGrid)
+                btnManagementFormats_Click(sender, e);
+
+                // Clear the form
+                btnManagementFormatClear_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content = "Error: " + ex.Message;
+            }
+        }
+        private void btnManagementFormatDelete_Click(object sender, RoutedEventArgs e) // Delete Format
+        {
+            try
+            {
+                _oFormats[dgManagement.SelectedIndex].Delete();
+                _oFormats.RemoveAt(dgManagement.SelectedIndex);
+
+                lblStatus.Content = "Record sucessfully deleted.";
+
+                // Call Format initialization button (Handles formatting of DataGrid)
+                btnManagementFormats_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content = "Error: " + ex.Message;
+            }
+        }
+        private void btnManagementFormatClear_Click(object sender, RoutedEventArgs e) // Clear Format Fields
+        {
+            txtManagementFormatId.Text = string.Empty;
+            txtManagementFormatDescription.Text = string.Empty;
+            dgManagement.SelectedIndex = -1;
+            btnManagementFormatNew.Content = "Add";
+        }
+        #endregion
+
+        #region "Management - Pricing Buttons"
+    // Management - Pricing Buttons
+        private void btnManagementPricing_Click(object sender, RoutedEventArgs e) // Select Pricing
+        {
+            gbMovies.Visibility = gbFormats.Visibility = Visibility.Hidden;
+            gbPricing.Visibility = Visibility.Visible;
+            btnManagementPricingNew.Content = "Add";
+
+            // Set Pricing list as active
+            dgManagement.ItemsSource = null;
+            dgManagement.ItemsSource = _oMediaItemPricings.Items;
+
+            // Hide primary key fields
+            dgManagement.Columns[0].Visibility = Visibility.Hidden;
+        }
+        private void btnManagementPricingNew_Click(object sender, RoutedEventArgs e) // Add/Update Pricing
+        {
+            try
+            {
+                if ((string)btnManagementPricingNew.Content == "Add")
+                {
+                    CMediaItemPricing oMediaItemPricing = new CMediaItemPricing();
+
+                    //oMediaItemPricing.MediaItemPricingId = 0; // not used
+                    oMediaItemPricing.Description = txtManagementPricingDescription.Text;
+                    oMediaItemPricing.Price = decimal.Parse(txtManagementPricingPrice.Text);
+                    oMediaItemPricing.Length = int.Parse(txtManagementPricingLength.Text);
+
+                    oMediaItemPricing.Insert();
+                    _oMediaItemPricings.Add(oMediaItemPricing);
+
+                    lblStatus.Content = "Record successfully added.";
+                }
+                else if ((string)btnManagementPricingNew.Content == "Update")
+                {
+                    if (_oMediaItemPricings[dgManagement.SelectedIndex].MediaItemPricingId.ToString() == txtManagementPricingId.Text)
+                    {
+                        _oMediaItemPricings[dgManagement.SelectedIndex].Description = txtManagementPricingDescription.Text;
+                        _oMediaItemPricings[dgManagement.SelectedIndex].Price = decimal.Parse(txtManagementPricingPrice.Text);
+                        _oMediaItemPricings[dgManagement.SelectedIndex].Length = int.Parse(txtManagementPricingLength.Text);
+
+                        _oMediaItemPricings[dgManagement.SelectedIndex].Update();
+
+                        lblStatus.Content = "Record successfully updated.";
+                    }
+                    else
+                        throw new Exception("PricingId does not match, Update failed.");
+                }
+
+                // Call Pricing initialization button (Handles formating of DataGrid)
+                btnManagementPricing_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content = "Error: " + ex.Message;
+            }
+        }
+        private void btnManagementPricingDelete_Click(object sender, RoutedEventArgs e) // Delete Pricing
+        {
+            try
+            {
+                _oMediaItemPricings[dgManagement.SelectedIndex].Delete();
+                _oMediaItemPricings.RemoveAt(dgManagement.SelectedIndex);
+
+                lblStatus.Content = "Record sucessfully deleted.";
+
+                // Call Pricing initialization button (Handles formating of DataGrid)
+                btnManagementPricing_Click(sender, e);
+
+                // Clear the form
+                btnManagementPricingClear_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content = "Error: " + ex.Message;
+            }
+        }
+        private void btnManagementPricingClear_Click(object sender, RoutedEventArgs e) // Clear Pricing Fields
+        {
+            txtManagementPricingId.Text = string.Empty;
+            txtManagementPricingDescription.Text = string.Empty;
+            txtManagementPricingPrice.Text = string.Empty;
+            txtManagementPricingLength.Text = string.Empty;
+            dgManagement.SelectedIndex = -1;
+            btnManagementPricingNew.Content = "Add";
+        }
+        #endregion
     }
 }

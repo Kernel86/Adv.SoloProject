@@ -1,6 +1,7 @@
 
 CREATE TABLE [dbo].[tblMediaItem] (
   [MediaItem_Id] INT NOT NULL IDENTITY(0,1),
+  [Barcode] VARCHAR(20) NOT NULL,
   [InvetoryDate] DATE NULL ,
   [Media_Id] INT NOT NULL ,
   [MediaItemState_Id] INT NOT NULL ,

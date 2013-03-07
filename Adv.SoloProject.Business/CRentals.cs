@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Adv.SoloProject.Data;
+
 namespace Adv.SoloProject.Business
 {
     public class CRentals
@@ -50,6 +52,23 @@ namespace Adv.SoloProject.Business
             _glItems.RemoveAt(iIndex);
             if (!RentalsChanged.Equals(null))
                 RentalsChanged(this, new EventArgs());
+        }
+
+        public void Load()
+        {
+            MediaVaultDataContext oDc = new MediaVaultDataContext();
+
+            // Select Rentals using LINQ
+            var otblRentals = from c in oDc.tblRentals select c;
+
+            // Fill generic list of Rentals
+            foreach (tblRental otblRental in otblRentals)
+            {
+                CRental oRental = new CRental(otblRental);
+                _glItems.Add(oRental);
+            }
+
+            oDc = null;
         }
     }
 }

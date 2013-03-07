@@ -56,16 +56,16 @@
         <elementListCompartment Id="e5a5a950-e7c4-4f62-a363-fb10f2df9e94" absoluteBounds="4.765, 2.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="107eef2b-115e-4775-a42d-680e03905467" absoluteBounds="6.875, 0.5, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/MediaVaultDataContext/tblRental" />
-      <nestedChildShapes>
-        <elementListCompartment Id="7aa7cc7d-5131-4995-a494-aefd25b83a0a" absoluteBounds="6.89, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="73ea3e6d-c20d-480e-aa18-ffcebdd8ffd3" absoluteBounds="6.875, 2.25, 2, 1.5785953776041666">
+    <classShape Id="37bb0d50-7057-4eab-843e-04c51c720bc2" absoluteBounds="6.875, 2.5, 2, 1.7708968098958331">
       <DataClassMoniker Name="/MediaVaultDataContext/tblRentalItem" />
       <nestedChildShapes>
-        <elementListCompartment Id="bbee7a96-be98-4a24-8315-3981da98ac5e" absoluteBounds="6.89, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5fe26268-e309-4045-ae2b-a6d06e47ea3c" absoluteBounds="6.89, 2.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2ccc4600-21df-4ae0-b216-84db6f23ec93" absoluteBounds="6.875, 0.5, 2, 1.9631982421875">
+      <DataClassMoniker Name="/MediaVaultDataContext/tblRental" />
+      <nestedChildShapes>
+        <elementListCompartment Id="efa71c28-76e6-46dc-9ac4-5040afbed327" absoluteBounds="6.89, 0.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

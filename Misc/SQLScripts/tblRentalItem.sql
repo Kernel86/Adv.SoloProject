@@ -4,6 +4,7 @@ CREATE TABLE [dbo].[tblRentalItem] (
   [Rental_Id] INT NOT NULL ,
   [MediaItem_Id] INT NOT NULL ,
   [DueDate] DATE NULL ,
+  [DateIn] DATE NULL
  CONSTRAINT [PK_tblRentalItem] PRIMARY KEY CLUSTERED 
 (
 	[RentalItem_Id] ASC

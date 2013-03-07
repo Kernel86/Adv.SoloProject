@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Adv.SoloProject.Data;
+
 namespace Adv.SoloProject.Business
 {
-    class CCreditCardTypes
+    public class CCreditCardTypes
     {
         // Private Fields
         private List<CCreditCardType> _glItems;
@@ -50,6 +52,23 @@ namespace Adv.SoloProject.Business
             _glItems.RemoveAt(iIndex);
             if (!CreditCardTypesChanged.Equals(null))
                 CreditCardTypesChanged(this, new EventArgs());
+        }
+
+        public void Load()
+        {
+            MediaVaultDataContext oDc = new MediaVaultDataContext();
+
+            // Select CreditCardTypes using LINQ
+            var otblCreditCardTypes = from c in oDc.tblCreditCardTypes select c;
+
+            // Fill generic list of CreditCardTypes
+            foreach (tblCreditCardType otblCreditCardType in otblCreditCardTypes)
+            {
+                CCreditCardType oCreditCardType = new CCreditCardType(otblCreditCardType);
+                _glItems.Add(oCreditCardType);
+            }
+
+            oDc = null;
         }
     }
 }

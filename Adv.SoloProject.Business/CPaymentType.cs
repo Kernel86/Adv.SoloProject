@@ -7,17 +7,17 @@ using Adv.SoloProject.Data;
 
 namespace Adv.SoloProject.Business
 {
-    public class CCreditCardType
+    public class CPaymentType
     {
         // Private Fields
-        private int _iCreditCardTypeId;
+        private int _iPaymentTypeId;
         private string _sDescription;
 
         // Public Properties
-        public int CreditCardTypeId
+        public int PaymentTypeId
         {
-            get { return _iCreditCardTypeId; }
-            set { _iCreditCardTypeId = value; }
+            get { return _iPaymentTypeId; }
+            set { _iPaymentTypeId = value; }
         }
 
         public string Description
@@ -27,15 +27,15 @@ namespace Adv.SoloProject.Business
         }
 
         // Constructors
-        public CCreditCardType()
+        public CPaymentType()
         {
 
         }
 
-        public CCreditCardType(tblCreditCardType otblCreditCardType)
+        public CPaymentType(tblPaymentType otblPaymentType)
         {
-            _iCreditCardTypeId = otblCreditCardType.CreditCardType_Id;
-            _sDescription = otblCreditCardType.Description;
+            _iPaymentTypeId = otblPaymentType.PaymentType_Id;
+            _sDescription = otblPaymentType.Description;
         }
 
         // Public Methods
@@ -45,12 +45,12 @@ namespace Adv.SoloProject.Business
             {
                 MediaVaultDataContext oDc = new MediaVaultDataContext();
 
-                tblCreditCardType otblCreditCardType = new tblCreditCardType();
+                tblPaymentType otblPaymentType = new tblPaymentType();
 
-                otblCreditCardType.CreditCardType_Id = CreditCardTypeId;
-                otblCreditCardType.Description = Description;
+                otblPaymentType.PaymentType_Id = PaymentTypeId;
+                otblPaymentType.Description = Description;
 
-                oDc.tblCreditCardTypes.InsertOnSubmit(otblCreditCardType);
+                oDc.tblPaymentTypes.InsertOnSubmit(otblPaymentType);
                 oDc.SubmitChanges();
                 oDc = null;
             }
@@ -66,11 +66,11 @@ namespace Adv.SoloProject.Business
             {
                 MediaVaultDataContext oDc = new MediaVaultDataContext();
 
-                tblCreditCardType otblCreditCardType = (from c in oDc.tblCreditCardTypes
-                                            where c.CreditCardType_Id == CreditCardTypeId
+                tblPaymentType otblPaymentType = (from c in oDc.tblPaymentTypes
+                                            where c.PaymentType_Id == PaymentTypeId
                                             select c).FirstOrDefault();
 
-                otblCreditCardType.Description = Description;
+                otblPaymentType.Description = Description;
 
                 oDc.SubmitChanges();
                 oDc = null;
@@ -87,12 +87,12 @@ namespace Adv.SoloProject.Business
             {
                 MediaVaultDataContext oDc = new MediaVaultDataContext();
 
-                tblCreditCardType otblCreditCardType = (from c in oDc.tblCreditCardTypes where c.CreditCardType_Id == CreditCardTypeId select c).FirstOrDefault();
+                tblPaymentType otblPaymentType = (from c in oDc.tblPaymentTypes where c.PaymentType_Id == PaymentTypeId select c).FirstOrDefault();
 
-                oDc.tblCreditCardTypes.DeleteOnSubmit(otblCreditCardType);
+                oDc.tblPaymentTypes.DeleteOnSubmit(otblPaymentType);
                 oDc.SubmitChanges();
 
-                otblCreditCardType = null;
+                otblPaymentType = null;
                 oDc = null;
             }
             catch (Exception ex)

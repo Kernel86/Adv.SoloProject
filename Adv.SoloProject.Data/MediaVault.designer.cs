@@ -48,6 +48,21 @@ namespace Adv.SoloProject.Data
     partial void InserttblStateCode(tblStateCode instance);
     partial void UpdatetblStateCode(tblStateCode instance);
     partial void DeletetblStateCode(tblStateCode instance);
+    partial void InserttblPaymentType(tblPaymentType instance);
+    partial void UpdatetblPaymentType(tblPaymentType instance);
+    partial void DeletetblPaymentType(tblPaymentType instance);
+    partial void InserttblCreditCardType(tblCreditCardType instance);
+    partial void UpdatetblCreditCardType(tblCreditCardType instance);
+    partial void DeletetblCreditCardType(tblCreditCardType instance);
+    partial void InserttblCreditCard(tblCreditCard instance);
+    partial void UpdatetblCreditCard(tblCreditCard instance);
+    partial void DeletetblCreditCard(tblCreditCard instance);
+    partial void InserttblRental(tblRental instance);
+    partial void UpdatetblRental(tblRental instance);
+    partial void DeletetblRental(tblRental instance);
+    partial void InserttblRentalItem(tblRentalItem instance);
+    partial void UpdatetblRentalItem(tblRentalItem instance);
+    partial void DeletetblRentalItem(tblRentalItem instance);
     #endregion
 		
 		public MediaVaultDataContext() : 
@@ -125,6 +140,46 @@ namespace Adv.SoloProject.Data
 			get
 			{
 				return this.GetTable<tblStateCode>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblPaymentType> tblPaymentTypes
+		{
+			get
+			{
+				return this.GetTable<tblPaymentType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblCreditCardType> tblCreditCardTypes
+		{
+			get
+			{
+				return this.GetTable<tblCreditCardType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblCreditCard> tblCreditCards
+		{
+			get
+			{
+				return this.GetTable<tblCreditCard>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblRental> tblRentals
+		{
+			get
+			{
+				return this.GetTable<tblRental>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblRentalItem> tblRentalItems
+		{
+			get
+			{
+				return this.GetTable<tblRentalItem>();
 			}
 		}
 		
@@ -1059,6 +1114,652 @@ namespace Adv.SoloProject.Data
 					this._Description = value;
 					this.SendPropertyChanged("Description");
 					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblPaymentType")]
+	public partial class tblPaymentType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _PaymentType_Id;
+		
+		private string _Description;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPaymentType_IdChanging(int value);
+    partial void OnPaymentType_IdChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public tblPaymentType()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentType_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int PaymentType_Id
+		{
+			get
+			{
+				return this._PaymentType_Id;
+			}
+			set
+			{
+				if ((this._PaymentType_Id != value))
+				{
+					this.OnPaymentType_IdChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentType_Id = value;
+					this.SendPropertyChanged("PaymentType_Id");
+					this.OnPaymentType_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(16)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblCreditCardType")]
+	public partial class tblCreditCardType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CreditCardType_Id;
+		
+		private string _Description;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCreditCardType_IdChanging(int value);
+    partial void OnCreditCardType_IdChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public tblCreditCardType()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditCardType_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CreditCardType_Id
+		{
+			get
+			{
+				return this._CreditCardType_Id;
+			}
+			set
+			{
+				if ((this._CreditCardType_Id != value))
+				{
+					this.OnCreditCardType_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CreditCardType_Id = value;
+					this.SendPropertyChanged("CreditCardType_Id");
+					this.OnCreditCardType_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(16)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblCreditCard")]
+	public partial class tblCreditCard : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CreditCard_Id;
+		
+		private int _Customer_Id;
+		
+		private string _CardName;
+		
+		private string _CardNumber;
+		
+		private System.DateTime _CardExpiration;
+		
+		private int _CreditCardType_Id;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCreditCard_IdChanging(int value);
+    partial void OnCreditCard_IdChanged();
+    partial void OnCustomer_IdChanging(int value);
+    partial void OnCustomer_IdChanged();
+    partial void OnCardNameChanging(string value);
+    partial void OnCardNameChanged();
+    partial void OnCardNumberChanging(string value);
+    partial void OnCardNumberChanged();
+    partial void OnCardExpirationChanging(System.DateTime value);
+    partial void OnCardExpirationChanged();
+    partial void OnCreditCardType_IdChanging(int value);
+    partial void OnCreditCardType_IdChanged();
+    #endregion
+		
+		public tblCreditCard()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditCard_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CreditCard_Id
+		{
+			get
+			{
+				return this._CreditCard_Id;
+			}
+			set
+			{
+				if ((this._CreditCard_Id != value))
+				{
+					this.OnCreditCard_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CreditCard_Id = value;
+					this.SendPropertyChanged("CreditCard_Id");
+					this.OnCreditCard_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Customer_Id", DbType="Int NOT NULL")]
+		public int Customer_Id
+		{
+			get
+			{
+				return this._Customer_Id;
+			}
+			set
+			{
+				if ((this._Customer_Id != value))
+				{
+					this.OnCustomer_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Customer_Id = value;
+					this.SendPropertyChanged("Customer_Id");
+					this.OnCustomer_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardName", DbType="VarChar(48) NOT NULL", CanBeNull=false)]
+		public string CardName
+		{
+			get
+			{
+				return this._CardName;
+			}
+			set
+			{
+				if ((this._CardName != value))
+				{
+					this.OnCardNameChanging(value);
+					this.SendPropertyChanging();
+					this._CardName = value;
+					this.SendPropertyChanged("CardName");
+					this.OnCardNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNumber", DbType="VarChar(19) NOT NULL", CanBeNull=false)]
+		public string CardNumber
+		{
+			get
+			{
+				return this._CardNumber;
+			}
+			set
+			{
+				if ((this._CardNumber != value))
+				{
+					this.OnCardNumberChanging(value);
+					this.SendPropertyChanging();
+					this._CardNumber = value;
+					this.SendPropertyChanged("CardNumber");
+					this.OnCardNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardExpiration", DbType="Date NOT NULL")]
+		public System.DateTime CardExpiration
+		{
+			get
+			{
+				return this._CardExpiration;
+			}
+			set
+			{
+				if ((this._CardExpiration != value))
+				{
+					this.OnCardExpirationChanging(value);
+					this.SendPropertyChanging();
+					this._CardExpiration = value;
+					this.SendPropertyChanged("CardExpiration");
+					this.OnCardExpirationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditCardType_Id", DbType="Int NOT NULL")]
+		public int CreditCardType_Id
+		{
+			get
+			{
+				return this._CreditCardType_Id;
+			}
+			set
+			{
+				if ((this._CreditCardType_Id != value))
+				{
+					this.OnCreditCardType_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CreditCardType_Id = value;
+					this.SendPropertyChanged("CreditCardType_Id");
+					this.OnCreditCardType_IdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblRental")]
+	public partial class tblRental : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Rental_Id;
+		
+		private int _Customer_Id;
+		
+		private int _PaymentType_Id;
+		
+		private System.Nullable<System.DateTime> _CreditCard_Id__INT_NULL_______TransactionDate;
+		
+		private System.Nullable<decimal> _TransactionAmount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRental_IdChanging(int value);
+    partial void OnRental_IdChanged();
+    partial void OnCustomer_IdChanging(int value);
+    partial void OnCustomer_IdChanged();
+    partial void OnPaymentType_IdChanging(int value);
+    partial void OnPaymentType_IdChanged();
+    partial void OnCreditCard_Id__INT_NULL_______TransactionDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreditCard_Id__INT_NULL_______TransactionDateChanged();
+    partial void OnTransactionAmountChanging(System.Nullable<decimal> value);
+    partial void OnTransactionAmountChanged();
+    #endregion
+		
+		public tblRental()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rental_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Rental_Id
+		{
+			get
+			{
+				return this._Rental_Id;
+			}
+			set
+			{
+				if ((this._Rental_Id != value))
+				{
+					this.OnRental_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Rental_Id = value;
+					this.SendPropertyChanged("Rental_Id");
+					this.OnRental_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Customer_Id", DbType="Int NOT NULL")]
+		public int Customer_Id
+		{
+			get
+			{
+				return this._Customer_Id;
+			}
+			set
+			{
+				if ((this._Customer_Id != value))
+				{
+					this.OnCustomer_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Customer_Id = value;
+					this.SendPropertyChanged("Customer_Id");
+					this.OnCustomer_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentType_Id", DbType="Int NOT NULL")]
+		public int PaymentType_Id
+		{
+			get
+			{
+				return this._PaymentType_Id;
+			}
+			set
+			{
+				if ((this._PaymentType_Id != value))
+				{
+					this.OnPaymentType_IdChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentType_Id = value;
+					this.SendPropertyChanged("PaymentType_Id");
+					this.OnPaymentType_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[CreditCard_Id` INT NULL ,\r\n  [TransactionDate]", Storage="_CreditCard_Id__INT_NULL_______TransactionDate", DbType="Date")]
+		public System.Nullable<System.DateTime> CreditCard_Id__INT_NULL_______TransactionDate
+		{
+			get
+			{
+				return this._CreditCard_Id__INT_NULL_______TransactionDate;
+			}
+			set
+			{
+				if ((this._CreditCard_Id__INT_NULL_______TransactionDate != value))
+				{
+					this.OnCreditCard_Id__INT_NULL_______TransactionDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreditCard_Id__INT_NULL_______TransactionDate = value;
+					this.SendPropertyChanged("CreditCard_Id__INT_NULL_______TransactionDate");
+					this.OnCreditCard_Id__INT_NULL_______TransactionDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransactionAmount", DbType="Decimal(8,2)")]
+		public System.Nullable<decimal> TransactionAmount
+		{
+			get
+			{
+				return this._TransactionAmount;
+			}
+			set
+			{
+				if ((this._TransactionAmount != value))
+				{
+					this.OnTransactionAmountChanging(value);
+					this.SendPropertyChanging();
+					this._TransactionAmount = value;
+					this.SendPropertyChanged("TransactionAmount");
+					this.OnTransactionAmountChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblRentalItem")]
+	public partial class tblRentalItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RentalItem_Id;
+		
+		private int _Rental_Id;
+		
+		private int _MediaItem_Id;
+		
+		private System.Nullable<System.DateTime> _DueDate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRentalItem_IdChanging(int value);
+    partial void OnRentalItem_IdChanged();
+    partial void OnRental_IdChanging(int value);
+    partial void OnRental_IdChanged();
+    partial void OnMediaItem_IdChanging(int value);
+    partial void OnMediaItem_IdChanged();
+    partial void OnDueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDueDateChanged();
+    #endregion
+		
+		public tblRentalItem()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentalItem_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RentalItem_Id
+		{
+			get
+			{
+				return this._RentalItem_Id;
+			}
+			set
+			{
+				if ((this._RentalItem_Id != value))
+				{
+					this.OnRentalItem_IdChanging(value);
+					this.SendPropertyChanging();
+					this._RentalItem_Id = value;
+					this.SendPropertyChanged("RentalItem_Id");
+					this.OnRentalItem_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rental_Id", DbType="Int NOT NULL")]
+		public int Rental_Id
+		{
+			get
+			{
+				return this._Rental_Id;
+			}
+			set
+			{
+				if ((this._Rental_Id != value))
+				{
+					this.OnRental_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Rental_Id = value;
+					this.SendPropertyChanged("Rental_Id");
+					this.OnRental_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MediaItem_Id", DbType="Int NOT NULL")]
+		public int MediaItem_Id
+		{
+			get
+			{
+				return this._MediaItem_Id;
+			}
+			set
+			{
+				if ((this._MediaItem_Id != value))
+				{
+					this.OnMediaItem_IdChanging(value);
+					this.SendPropertyChanging();
+					this._MediaItem_Id = value;
+					this.SendPropertyChanged("MediaItem_Id");
+					this.OnMediaItem_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DueDate", DbType="Date")]
+		public System.Nullable<System.DateTime> DueDate
+		{
+			get
+			{
+				return this._DueDate;
+			}
+			set
+			{
+				if ((this._DueDate != value))
+				{
+					this.OnDueDateChanging(value);
+					this.SendPropertyChanging();
+					this._DueDate = value;
+					this.SendPropertyChanged("DueDate");
+					this.OnDueDateChanged();
 				}
 			}
 		}

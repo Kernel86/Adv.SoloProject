@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[tblRental] (
   [PaymentType_Id] INT NOT NULL ,
   [CreditCard_Id` INT NULL ,
   [TransactionDate] DATE NULL ,
-  [TransactionAmount] DECIMAL(2) NULL ,
+  [TransactionAmount] DECIMAL(8,2) NULL ,
  CONSTRAINT [PK_tblRental] PRIMARY KEY CLUSTERED 
 (
 	[Rental_Id] ASC

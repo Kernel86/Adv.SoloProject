@@ -28,7 +28,10 @@ namespace Adv.SoloProject.UI
         public static CMediaItemDisplays _oMediaItemDisplays;
         wpfDlgMediaItems _wpfDlgMediaItems;
         CMediaItemPricings _oMediaItemPricings;
+        CCreditCards _oCreditCards;
         CStateCodes _oStateCodes;
+        CPaymentTypes _oPaymentTypes;
+        CCreditCardTypes _oCreditCardTypes;
 
         public MainWindow()
         {
@@ -70,6 +73,20 @@ namespace Adv.SoloProject.UI
                 cbState.DisplayMemberPath = "Description";
                 cbState.SelectedValuePath = "Code";
 
+                // Populate PaymentTypes
+                _oPaymentTypes = new CPaymentTypes();
+                _oPaymentTypes.Load();
+                cbRentalPaymentType.ItemsSource = _oPaymentTypes.Items;
+                cbRentalPaymentType.DisplayMemberPath = "Description";
+                cbRentalPaymentType.SelectedValuePath = "PaymentTypeId";
+
+                // Populate CreditCardTypes
+                _oCreditCardTypes = new CCreditCardTypes();
+                _oCreditCardTypes.Load();
+                cbRentalCardType.ItemsSource = _oCreditCardTypes.Items;
+                cbRentalCardType.DisplayMemberPath = "Description";
+                cbRentalCardType.SelectedValuePath = "CreditCardTypeId";
+
                 gridManagement.Visibility = gridRental.Visibility = gridNewCustomer.Visibility = Visibility.Hidden;
                 gridHome.Visibility = Visibility.Visible;
 
@@ -106,10 +123,29 @@ namespace Adv.SoloProject.UI
 
         private void btnSelectCustomer_Click(object sender, RoutedEventArgs e)
         {
-            gridHome.Visibility = Visibility.Hidden;
-            btnManagement.IsEnabled = btnNewCustomer.IsEnabled = false;
+            try
+            {
+                if (dgCustomers.SelectedIndex != -1)
+                {
+                    gridHome.Visibility = Visibility.Hidden;
+                    btnManagement.IsEnabled = btnNewCustomer.IsEnabled = false;
 
-            gridRental.Visibility = Visibility.Visible;
+                    gridRental.Visibility = Visibility.Visible;
+
+                    txtRentalAccount.Text = _oCustomers[dgCustomers.SelectedIndex].AccountNumber;
+                    _oCreditCards = new CCreditCards();
+                    _oCreditCards.LoadAccount(txtRentalAccount.Text);
+                    cbRentalCreditCard.ItemsSource = _oCreditCards.Items;
+                    cbRentalCreditCard.DisplayMemberPath = "CardNumber";
+                    cbRentalCreditCard.SelectedValuePath = "CreditCardId";
+                }
+                else
+                    MessageBox.Show("You must select a customer to continue.", "Notice", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content = "Error: " + ex.Message;
+            }
         }
 
         private void btnNewCustomer_Click(object sender, RoutedEventArgs e)
@@ -133,7 +169,7 @@ namespace Adv.SoloProject.UI
             {
                 CCustomer oCustomer = new CCustomer();
                 
-              //oCustomer.CustomerId = 0;
+              //oCustomer.CustomerId = 0; // not used
                 oCustomer.AccountNumber = txtFirstName.Text.Substring(0, 1) + txtLastName.Text.Substring(0, 1) + txtZipCode.Text.Substring(txtZipCode.Text.Length - 2, 2);
                 oCustomer.FirstName = txtFirstName.Text;
                 oCustomer.LastName = txtLastName.Text;
@@ -172,6 +208,12 @@ namespace Adv.SoloProject.UI
 
             gridHome.Visibility = Visibility.Visible;
             btnManagement.IsEnabled = btnNewCustomer.IsEnabled = true;
+
+            // Release credit card information
+            cbRentalCreditCard.ItemsSource = null;
+            cbRentalCreditCard.Items.Clear();
+            _oCreditCards = null;
+            txtRentalCardholder.Text = txtRentalCardNumber.Text = string.Empty;
         }
 
         private void btnRentalFinish_Click(object sender, RoutedEventArgs e)
@@ -510,5 +552,22 @@ namespace Adv.SoloProject.UI
             btnManagementPricingNew.Content = "Add";
         }
         #endregion
+
+        private void cbRentalPaymentType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_oPaymentTypes[cbRentalPaymentType.SelectedIndex].Description == "Credit")
+            {
+                gridCreditCard.IsEnabled = true;
+            }
+            else
+                gridCreditCard.IsEnabled = false;
+        }
+
+        private void cbRentalCreditCard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txtRentalCardNumber.Text = _oCreditCards[cbRentalCreditCard.SelectedIndex].CardNumber;
+            txtRentalCardholder.Text = _oCreditCards[cbRentalCreditCard.SelectedIndex].CardName;
+            cbRentalCardType.SelectedValue = _oCreditCards[cbRentalCreditCard.SelectedIndex].CreditCardTypeId;
+        }
     }
 }

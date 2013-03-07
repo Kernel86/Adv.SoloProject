@@ -2,8 +2,9 @@
 CREATE TABLE [dbo].[tblCreditCard] (
   [CreditCard_Id] INT NOT NULL IDENTITY(0,1),
   [Customer_Id] INT NOT NULL ,
-  [CardName] VARCHAR(48) NULL ,
-  [CardNumber] VARCHAR(19) NULL ,
+  [CardName] VARCHAR(48) NOT NULL ,
+  [CardNumber] VARCHAR(19) NOT NULL ,
+  [CardExpiration] DATE NOT NULL,
   [CreditCardType_Id] INT NOT NULL,
   CONSTRAINT [PK_tblCreditCard] PRIMARY KEY CLUSTERED 
 (

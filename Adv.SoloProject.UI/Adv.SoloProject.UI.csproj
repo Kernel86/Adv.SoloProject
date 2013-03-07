@@ -115,6 +115,10 @@
       <Project>{EE33E8E5-19A1-4496-ACB9-38CA3015A1B2}</Project>
       <Name>Adv.SoloProject.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Adv.SoloProject.Data\Adv.SoloProject.Data.csproj">
+      <Project>{97485D8F-A222-46AA-A3FA-FA48C88B96C6}</Project>
+      <Name>Adv.SoloProject.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\IM000194_small.jpg" />

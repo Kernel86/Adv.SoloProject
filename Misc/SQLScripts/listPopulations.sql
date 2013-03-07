@@ -23,12 +23,16 @@ INSERT INTO tblMediaItemState VALUES('Damaged');
 INSERT INTO tblMediaItemState VALUES('Withdrawn');
 INSERT INTO tblMediaItemState VALUES('Checked Out');
 
-
 /* PaymentType Population */
 INSERT INTO tblPaymentType VALUES('Cash');
 INSERT INTO tblPaymentType VALUES('Check');
 INSERT INTO tblPaymentType VALUES('Credit');
 INSERT INTO tblPaymentType VALUES('BalanceDue');
+
+/* CreditCardType Population */
+INSERT INTO tblCreditCardType VALUES('American Express');
+INSERT INTO tblCreditCardType VALUES('MasterCard');
+INSERT INTO tblCreditCardType VALUES('Visa');
 
 /* RentalItemStatus Population */
 INSERT INTO tblRentalItemStatus VALUES('Current');

@@ -54,6 +54,45 @@
       <Column Name="Description" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tblPaymentType" Member="tblPaymentTypes">
+    <Type Name="tblPaymentType">
+      <Column Name="PaymentType_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCreditCardType" Member="tblCreditCardTypes">
+    <Type Name="tblCreditCardType">
+      <Column Name="CreditCardType_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCreditCard" Member="tblCreditCards">
+    <Type Name="tblCreditCard">
+      <Column Name="CreditCard_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Customer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CardName" Type="System.String" DbType="VarChar(48) NOT NULL" CanBeNull="false" />
+      <Column Name="CardNumber" Type="System.String" DbType="VarChar(19) NOT NULL" CanBeNull="false" />
+      <Column Name="CardExpiration" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="CreditCardType_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblRental" Member="tblRentals">
+    <Type Name="tblRental">
+      <Column Name="Rental_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Customer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentType_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[CreditCard_Id` INT NULL ,&#xD;&#xA;  [TransactionDate]" Member="CreditCard_Id__INT_NULL_______TransactionDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TransactionAmount" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblRentalItem" Member="tblRentalItems">
+    <Type Name="tblRentalItem">
+      <Column Name="RentalItem_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Rental_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MediaItem_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.SP_GetMediaItemDisplay" Method="SP_GetMediaItemDisplay">
     <ElementType Name="SP_GetMediaItemDisplayResult">
       <Column Name="MediaItem_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />

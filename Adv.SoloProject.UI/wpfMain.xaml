@@ -28,7 +28,7 @@
             <Button Content="Select Customer" Height="52" HorizontalAlignment="Right" Margin="0,27,12,0" Name="btnSelectCustomer" VerticalAlignment="Top" Width="98" Click="btnSelectCustomer_Click" />
         </Grid>
 
-        <Grid Name="gridRental" Visibility="Hidden">
+        <Grid Name="gridRental" Visibility="Visible">
             <Label Content="Account:" Height="28" HorizontalAlignment="Left" Margin="43,29,0,0" Name="label15" VerticalAlignment="Top" />
             <TextBox Height="23" HorizontalAlignment="Left" Margin="105,31,0,0" Name="txtRentalAccount" VerticalAlignment="Top" Width="120" IsReadOnly="True" IsEnabled="False" />
 
@@ -36,11 +36,12 @@
             <Label Content="Movie ID:" Height="28" HorizontalAlignment="Left" Margin="39,55,0,0" Name="label16" VerticalAlignment="Top" />
             <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="105,57,0,0" Name="txtRentalMovieID" VerticalAlignment="Top" Width="120" />
             <Button Content="Add Item" Height="23" HorizontalAlignment="Left" Margin="241,55,0,0" Name="btnRentalAddItem" VerticalAlignment="Top" Width="75" />
-            <Button Content="Cancel" Height="23" HorizontalAlignment="Left" Margin="431,55,0,0" Name="btnRentalCancel" VerticalAlignment="Top" Width="75" Click="btnRentalCancel_Click" />
+            <Button Content="Movie Lookup" Height="23" HorizontalAlignment="Left" Margin="331,0,0,303" Name="btnMovieLookup" VerticalAlignment="Bottom" Width="94" Click="btnMovieLookup_Click" />
+            <Button Content="Cancel" Height="23" HorizontalAlignment="Left" Margin="482,55,0,0" Name="btnRentalCancel" VerticalAlignment="Top" Width="75" Click="btnRentalCancel_Click" />
             <Button Content="Complete Order" Height="51" HorizontalAlignment="Right" Margin="0,29,12,0" Name="btnRentalFinish" VerticalAlignment="Top" Width="94" Click="btnRentalFinish_Click" />
             <GroupBox Header="Payment:" Margin="0,80,10,0" Name="groupBox1" HorizontalAlignment="Right" Width="235" Height="243" VerticalAlignment="Top">
                 <Grid Height="222">
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="97,6,0,0" Name="cbRentalPaymentType" VerticalAlignment="Top" Width="120" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="97,6,0,0" Name="cbRentalPaymentType" VerticalAlignment="Top" Width="120" SelectionChanged="cbRentalPaymentType_SelectionChanged" />
                     <Label Content="Payment Type:" Height="28" HorizontalAlignment="Left" Margin="4,1,0,0" Name="label17" VerticalAlignment="Top" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="97,193,0,0" Name="txtRentalTotal" VerticalAlignment="Top" Width="120" IsReadOnly="True" TextAlignment="Right" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="97,168,0,0" Name="txtRentalTax" VerticalAlignment="Top" Width="120" IsReadOnly="True" TextAlignment="Right" />
@@ -49,21 +50,21 @@
                     <Label Content="Tax (5.000%):" Height="28" HorizontalAlignment="Left" Margin="12,166,0,0" Name="label19" VerticalAlignment="Top" />
                     <Label Content="SubTotal:" Height="28" HorizontalAlignment="Left" Margin="32,141,0,0" Name="label20" VerticalAlignment="Top" />
                     
-                    <Grid Name="gridCreditCard" HorizontalAlignment="Right" Width="223">
-                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="97,37,0,0" Name="cbRentalCreditCard" VerticalAlignment="Top" Width="120" IsEnabled="False" />
+                    <Grid Name="gridCreditCard" HorizontalAlignment="Right" Width="223" IsEnabled="False">
+                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="97,37,0,0" Name="cbRentalCreditCard" VerticalAlignment="Top" Width="120" SelectionChanged="cbRentalCreditCard_SelectionChanged" />
                         <Label Content="Credit Card:" Height="28" HorizontalAlignment="Left" Margin="18,32,0,0" Name="label21" VerticalAlignment="Top" />
-                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="97,62,0,0" Name="cbRentalCardType" VerticalAlignment="Top" Width="120" IsEnabled="False" />
+                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="97,62,0,0" Name="cbRentalCardType" VerticalAlignment="Top" Width="120"  />
                         <Label Content="Card Type:" Height="28" HorizontalAlignment="Left" Margin="25,57,0,0" Name="label22" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="97,87,0,0" Name="txtRentalCardNumber" VerticalAlignment="Top" Width="120" IsEnabled="False" TextAlignment="Right" />
+                        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="97,87,0,0" Name="txtRentalCardNumber" VerticalAlignment="Top" Width="120" TextAlignment="Right" />
                         <Label Content="Card Number:" Height="28" HorizontalAlignment="Left" Margin="7,85,0,0" Name="label23" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="97,112,0,0" Name="txtRentalCardholder" VerticalAlignment="Top" Width="120" IsEnabled="False" />
+                        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="97,112,0,0" Name="txtRentalCardholder" VerticalAlignment="Top" Width="120" />
                         <Label Content="Cardholder:" Height="28" HorizontalAlignment="Left" Margin="19,110,0,0" Name="label24" VerticalAlignment="Top" />
                     </Grid>
                 </Grid>
             </GroupBox>
         </Grid>
 
-        <Grid Name="gridManagement" Visibility="Visible">
+        <Grid Name="gridManagement" Visibility="Hidden">
             <Button Content="Movies" Height="23" HorizontalAlignment="Left" Margin="169,29,0,0" Name="btnManagementMovies" VerticalAlignment="Top" Width="111" Click="btnManagementMovies_Click" />
             <Button Content="Formats" Margin="306,29,0,0" Name="btnManagementFormats" HorizontalAlignment="Left" Width="111" Height="23" VerticalAlignment="Top" Click="btnManagementFormats_Click" />
             <Button Content="Pricing Categories" Height="23" HorizontalAlignment="Left" Margin="440,29,0,0" Name="btnManagementPricing" VerticalAlignment="Top" Width="111" Click="btnManagementPricing_Click" />
@@ -135,7 +136,6 @@
         </Grid>
 
         <Button Content="New Customer" Height="23" HorizontalAlignment="Left" Margin="24,0,0,29" Name="btnNewCustomer" VerticalAlignment="Bottom" Width="94" Click="btnNewCustomer_Click" />
-        <Button Content="Movie Lookup" Height="23" HorizontalAlignment="Left" Margin="143,0,0,29" Name="btnMovieLookup" VerticalAlignment="Bottom" Width="94" Click="btnMovieLookup_Click" />
         <Button Content="Rental Return" Height="23" HorizontalAlignment="Left" Margin="264,0,0,29" Name="btnRentalReturn" VerticalAlignment="Bottom" Width="94" Click="btnRentalReturn_Click" />
         <Button Content="Mangement" Height="23" HorizontalAlignment="Right" Margin="0,0,12,29" Name="btnManagement" VerticalAlignment="Bottom" Width="94" Click="btnManagement_Click" />
     </Grid>

@@ -21,6 +21,8 @@ namespace Adv.SoloProject.UI
         public wpfDlgMediaItems()
         {
             InitializeComponent();
+
+            dpMovieInventoryDate.SelectedDate = DateTime.Now;
         }
 
         private void dgMediaItems_Loaded(object sender, RoutedEventArgs e)
@@ -29,7 +31,6 @@ namespace Adv.SoloProject.UI
             dgMediaItems.ItemsSource = null;
             dgMediaItems.ItemsSource = MainWindow._oMediaItemDisplays.Items;
             
-
             // Hide primary key fields
             dgMediaItems.Columns[0].Visibility = Visibility.Hidden;
             dgMediaItems.Columns[1].Visibility = Visibility.Hidden;
@@ -42,6 +43,58 @@ namespace Adv.SoloProject.UI
             dgTc = dgMediaItems.Columns[6] as DataGridTextColumn;
             dgTc.Binding.StringFormat = "{0:dd/MM/yyy}";
             dgTc = null;
+        }
+
+        private void btnMovieItemCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMovieItemRental_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnMovieItemAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnMovieItemClear_Click(object sender, RoutedEventArgs e)
+        {
+            cbMovies.SelectedIndex = -1;
+            txtMovieTitle.Text = string.Empty;
+            dpMovieReleaseDate.SelectedDate = DateTime.Now;
+            txtMovieBarcode.Text = string.Empty;
+            dpMovieInventoryDate.SelectedDate = DateTime.Now;
+            cbMovieItemState.SelectedIndex = 0;
+            cbMoviePricing.SelectedIndex = 0;
+            cbMovieFormat.SelectedIndex = 0;
+        }
+
+        private void btnMovieItemDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //MainWindow._oMedias[MainWindow._oMediaItemDisplays[dgMediaItems.SelectedIndex].MediaItemId].Delete();
+                //MainWindow._oMediaItemDisplays.RemoveAt(dgMediaItems.SelectedIndex);
+                //MainWindow._oMedias.RemoveAt(dgMediaItems.SelectedIndex);
+
+                //lblStatus.Content = "Record sucessfully deleted.";
+
+                // Call initialization method (Handles formatting of DataGrid)
+                dgMediaItems_Loaded(sender, e);
+            }
+            catch (Exception ex)
+            {
+                //lblStatus.Content = "Error: " + ex.Message;
+            }
+        }
+
+        private void cbMovies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txtMovieTitle.Text = MainWindow._oMedias[cbMovies.SelectedIndex].Title;
+            dpMovieReleaseDate.SelectedDate = MainWindow._oMedias[cbMovies.SelectedIndex].ReleaseDate;
         }
     }
 }

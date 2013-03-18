@@ -59,7 +59,7 @@ namespace Adv.SoloProject.Business
             MediaVaultDataContext oDc = new MediaVaultDataContext();
 
             // Select customers using LINQ
-            var otblMediaItemPricings = from c in oDc.tblMediaItemPricings select c;
+            var otblMediaItemPricings = from c in oDc.tblMediaItemPricings orderby c.Description select c;
 
             // Fill generic list of customers
             foreach (tblMediaItemPricing otblMediaItemPricing in otblMediaItemPricings)

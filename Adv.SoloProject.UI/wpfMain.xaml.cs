@@ -22,12 +22,13 @@ namespace Adv.SoloProject.UI
     public partial class MainWindow : Window
     {
         CCustomers _oCustomers;
-        CMedias _oMedias;
+        public static CMedias _oMedias;
         CFormats _oFormats;
         CMediaItems _oMediaItems;
         public static CMediaItemDisplays _oMediaItemDisplays;
         wpfDlgMediaItems _wpfDlgMediaItems;
         CMediaItemPricings _oMediaItemPricings;
+        CMediaItemStates _oMediaItemStates;
         CCreditCards _oCreditCards;
         CStateCodes _oStateCodes;
         CPaymentTypes _oPaymentTypes;
@@ -60,6 +61,10 @@ namespace Adv.SoloProject.UI
                 _oMediaItemPricings = new CMediaItemPricings();
                 _oMediaItemPricings.Load();
 
+                // Populate MediaItemStates
+                _oMediaItemStates = new CMediaItemStates();
+                _oMediaItemStates.Load();
+
                 // Populate MediaItems
                 _oMediaItems = new CMediaItems();
                 _oMediaItems.Load();
@@ -79,6 +84,7 @@ namespace Adv.SoloProject.UI
                 cbRentalPaymentType.ItemsSource = _oPaymentTypes.Items;
                 cbRentalPaymentType.DisplayMemberPath = "Description";
                 cbRentalPaymentType.SelectedValuePath = "PaymentTypeId";
+                cbRentalPaymentType.SelectedIndex = 0;
 
                 // Populate CreditCardTypes
                 _oCreditCardTypes = new CCreditCardTypes();
@@ -227,7 +233,13 @@ namespace Adv.SoloProject.UI
         private void btnMovieLookup_Click(object sender, RoutedEventArgs e)
         {
             _wpfDlgMediaItems = new wpfDlgMediaItems();
+            _wpfDlgMediaItems.Height = 366;
+            _wpfDlgMediaItems.gridMovieItemManagement.Visibility = Visibility.Hidden;
+            _wpfDlgMediaItems.gridMovieItemRental.Visibility = Visibility.Visible;
+
+            
             _wpfDlgMediaItems.ShowDialog();
+            _wpfDlgMediaItems = null;
         }
 
         private void btnRentalReturn_Click(object sender, RoutedEventArgs e)
@@ -289,7 +301,33 @@ namespace Adv.SoloProject.UI
     // Management - Media Item Buttons
         private void btnManagementMovieManageCopies_Click(object sender, RoutedEventArgs e) // Select Media Item Management
         {
+            _wpfDlgMediaItems = new wpfDlgMediaItems();
+            _wpfDlgMediaItems.Height = 444;
+            _wpfDlgMediaItems.gridMovieItemManagement.Visibility = Visibility.Visible;
+            _wpfDlgMediaItems.gridMovieItemRental.Visibility = Visibility.Hidden;
 
+            _wpfDlgMediaItems.cbMovieItemState.ItemsSource = _oMediaItemStates.Items;
+            _wpfDlgMediaItems.cbMovieItemState.DisplayMemberPath = "Description";
+            _wpfDlgMediaItems.cbMovieItemState.SelectedValuePath = "MediaItemStateId";
+            _wpfDlgMediaItems.cbMovieItemState.SelectedIndex = 0;
+
+            _wpfDlgMediaItems.cbMovieFormat.ItemsSource = _oFormats.Items;
+            _wpfDlgMediaItems.cbMovieFormat.DisplayMemberPath = "Description";
+            _wpfDlgMediaItems.cbMovieFormat.SelectedValuePath = "FormatId";
+            _wpfDlgMediaItems.cbMovieFormat.SelectedIndex = 0;
+
+            _wpfDlgMediaItems.cbMoviePricing.ItemsSource = _oMediaItemPricings.Items;
+            _wpfDlgMediaItems.cbMoviePricing.DisplayMemberPath = "Description";
+            _wpfDlgMediaItems.cbMoviePricing.SelectedValuePath = "Price";
+            _wpfDlgMediaItems.cbMoviePricing.SelectedIndex = 0;
+
+            _wpfDlgMediaItems.cbMovies.ItemsSource = _oMedias.Items;
+            _wpfDlgMediaItems.cbMovies.DisplayMemberPath = "Title";
+            _wpfDlgMediaItems.cbMovies.SelectedValuePath = "MediaId";
+            _wpfDlgMediaItems.cbMovies.SelectedIndex = -1;
+
+            _wpfDlgMediaItems.ShowDialog();
+            _wpfDlgMediaItems = null;
         }
 
         #region "Management - Movie Buttons"
@@ -556,9 +594,7 @@ namespace Adv.SoloProject.UI
         private void cbRentalPaymentType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_oPaymentTypes[cbRentalPaymentType.SelectedIndex].Description == "Credit")
-            {
                 gridCreditCard.IsEnabled = true;
-            }
             else
                 gridCreditCard.IsEnabled = false;
         }

@@ -60,6 +60,8 @@
     <Compile Include="CMediaItemPricing.cs" />
     <Compile Include="CMediaItemPricings.cs" />
     <Compile Include="CMediaItems.cs" />
+    <Compile Include="CMediaItemState.cs" />
+    <Compile Include="CMediaItemStates.cs" />
     <Compile Include="CMedias.cs" />
     <Compile Include="CPaymentType.cs" />
     <Compile Include="CPaymentTypes.cs" />

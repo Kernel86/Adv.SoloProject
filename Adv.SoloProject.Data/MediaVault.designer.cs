@@ -63,6 +63,12 @@ namespace Adv.SoloProject.Data
     partial void InserttblRental(tblRental instance);
     partial void UpdatetblRental(tblRental instance);
     partial void DeletetblRental(tblRental instance);
+    partial void InserttblMediaItemState(tblMediaItemState instance);
+    partial void UpdatetblMediaItemState(tblMediaItemState instance);
+    partial void DeletetblMediaItemState(tblMediaItemState instance);
+    partial void InserttblCustomerStatus(tblCustomerStatus instance);
+    partial void UpdatetblCustomerStatus(tblCustomerStatus instance);
+    partial void DeletetblCustomerStatus(tblCustomerStatus instance);
     #endregion
 		
 		public MediaVaultDataContext() : 
@@ -180,6 +186,22 @@ namespace Adv.SoloProject.Data
 			get
 			{
 				return this.GetTable<tblRental>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblMediaItemState> tblMediaItemStates
+		{
+			get
+			{
+				return this.GetTable<tblMediaItemState>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblCustomerStatus> tblCustomerStatus
+		{
+			get
+			{
+				return this.GetTable<tblCustomerStatus>();
 			}
 		}
 		
@@ -1808,6 +1830,178 @@ namespace Adv.SoloProject.Data
 					this._TransactionAmount = value;
 					this.SendPropertyChanged("TransactionAmount");
 					this.OnTransactionAmountChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblMediaItemState")]
+	public partial class tblMediaItemState : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _MediaItemState_Id;
+		
+		private string _Description;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMediaItemState_IdChanging(int value);
+    partial void OnMediaItemState_IdChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public tblMediaItemState()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MediaItemState_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MediaItemState_Id
+		{
+			get
+			{
+				return this._MediaItemState_Id;
+			}
+			set
+			{
+				if ((this._MediaItemState_Id != value))
+				{
+					this.OnMediaItemState_IdChanging(value);
+					this.SendPropertyChanging();
+					this._MediaItemState_Id = value;
+					this.SendPropertyChanged("MediaItemState_Id");
+					this.OnMediaItemState_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(16)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblCustomerStatus")]
+	public partial class tblCustomerStatus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CustomerStatus_Id;
+		
+		private string _Description;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCustomerStatus_IdChanging(int value);
+    partial void OnCustomerStatus_IdChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public tblCustomerStatus()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerStatus_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CustomerStatus_Id
+		{
+			get
+			{
+				return this._CustomerStatus_Id;
+			}
+			set
+			{
+				if ((this._CustomerStatus_Id != value))
+				{
+					this.OnCustomerStatus_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerStatus_Id = value;
+					this.SendPropertyChanged("CustomerStatus_Id");
+					this.OnCustomerStatus_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(24)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
 				}
 			}
 		}

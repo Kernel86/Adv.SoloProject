@@ -59,7 +59,7 @@ namespace Adv.SoloProject.Business
             MediaVaultDataContext oDc = new MediaVaultDataContext();
 
             // Select MediaItemDisplays using LINQ
-            var otblMediaItemDisplays = from c in oDc.SP_GetMediaItemDisplay() select c;
+            var otblMediaItemDisplays = from c in oDc.SP_GetMediaItemDisplay() orderby c.Title select c;
 
             // Fill generic list of MediaItemDisplays
             foreach (SP_GetMediaItemDisplayResult otblMediaItemDisplay in otblMediaItemDisplays)

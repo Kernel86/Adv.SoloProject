@@ -95,6 +95,18 @@
       <Column Name="TransactionAmount" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.tblMediaItemState" Member="tblMediaItemStates">
+    <Type Name="tblMediaItemState">
+      <Column Name="MediaItemState_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCustomerStatus" Member="tblCustomerStatus">
+    <Type Name="tblCustomerStatus">
+      <Column Name="CustomerStatus_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(24)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.SP_GetMediaItemDisplay" Method="SP_GetMediaItemDisplay">
     <ElementType Name="SP_GetMediaItemDisplayResult">
       <Column Name="MediaItem_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
